@@ -3,8 +3,10 @@
     {
       "id": 1,
       "company": "Facebook",
-      "Description": "None",
-      "Details": "None"
+      "title": "Software Developer",
+      "description": "None",
+      "details": "None",
+      "status": "Intrested"
     }
   ]
 }
