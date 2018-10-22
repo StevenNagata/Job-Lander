@@ -53,8 +53,9 @@ export default class JobForm extends React.Component {
       details: event.target.details.value,
       status: event.target.status.value
     }
+    this.props.saveProspect(newProspect)
     event.target.reset()
-    console.log(newProspect)
+    this.setState({ status: 'Interested' })
   }
   render() {
     return (
@@ -65,7 +66,7 @@ export default class JobForm extends React.Component {
           justify="center"
           alignItems="center">
           <form
-            style={{ maxWidth: '50rem', marginTop: '5%' }}
+            style={{ maxWidth: '50rem', marginTop: '2%' }}
             onSubmit={this.handleSubmit}>
             <Typography variant='h5' gutterBottom align='center'>
               Create New Job Prospect
