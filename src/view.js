@@ -25,7 +25,6 @@ export default class ViewProspects extends React.Component {
 
 function renderJob(job) {
   return (
-
     <Card
       key={job.id}
       id={job.id}
@@ -43,10 +42,15 @@ function renderJob(job) {
           }
           <br />
         </Typography>
-        <Typography variant="subtitle2">
+        <Typography variant="caption">
           Status: {job.status}
         </Typography>
+
+        <Typography variant="caption">
+          Description:
+          <textarea style={{ border: 'none', width: '100%', height: '3rem' }} defaultValue={job.description} readOnly />
+        </Typography>
       </CardContent>
-    </Card>
+    </Card >
   )
 }
