@@ -1,6 +1,7 @@
 import React from 'react'
 import { get } from 'http'
 import JobForm from './job-form'
+import ViewProspects from './view'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -34,6 +35,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
+        <ViewProspects prospects={this.state.prospects} />
         <JobForm saveProspect={this.saveProspect} />
       </div>
     )
