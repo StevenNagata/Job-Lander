@@ -1,4 +1,5 @@
 import React from 'react'
+import { get } from 'http'
 import JobForm from './job-form'
 
 export default class App extends React.Component {
@@ -8,6 +9,14 @@ export default class App extends React.Component {
       prospects: []
     }
     this.saveProspect = this.saveProspect.bind(this)
+  }
+  componentDidMount() {
+    fetch('/prospects/', get)
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({ prospects: data })
+      })
+      .catch(err => console.log(err))
   }
   saveProspect(prospect) {
     const jsonProspect = JSON.stringify(prospect)
