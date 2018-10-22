@@ -1,5 +1,5 @@
 import React from 'react'
-import CreateProspect from './create-job-prospect'
+import JobForm from './job-form'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <CreateProspect />
+        <JobForm />
       </div>
     )
   }
