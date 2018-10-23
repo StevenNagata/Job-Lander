@@ -1,0 +1,62 @@
+import React from 'react'
+import Drawer from '@material-ui/core/Drawer'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import Visibility from '@material-ui/icons/Visibility'
+import AddCircle from '@material-ui/icons/AddCircle'
+import IconButton from '@material-ui/core/IconButton'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+
+export default class Navbar extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      left: false
+    }
+    this.toggleDrawer = this.toggleDrawer.bind(this)
+  }
+  toggleDrawer(side, open) {
+    this.setState({
+      [side]: open
+    })
+  }
+  render() {
+    return (
+      <div>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              onClick={() => this.toggleDrawer('left', true)}
+            >
+              <MoreVertIcon />
+            </IconButton>
+            <Typography variant="h5" color="inherit">
+              Job Lander
+            </Typography>
+            <Drawer open={this.state.left} onClose={() => this.toggleDrawer('left', false)}>
+              <div
+                tabIndex={0}
+                role="button"
+                onClick={() => this.toggleDrawer('left', false)}
+                onKeyDown={() => this.toggleDrawer('left', false)}>
+                <List>
+                  {['Create Prospect', 'View Prsopects'].map((text, index) => (
+                    <ListItem button key={text}>
+                      <ListItemIcon>{index % 2 === 0 ? <AddCircle /> : <Visibility />}</ListItemIcon>
+                      <ListItemText primary={text} />
+                    </ListItem>
+                  ))}
+                </List>
+              </div>
+            </Drawer>
+          </Toolbar>
+        </AppBar>
+      </div >
+    )
+  }
+}

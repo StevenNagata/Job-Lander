@@ -13,7 +13,7 @@ export default class ViewProspects extends React.Component {
   render() {
     return (
       <Grid
-        style={{ marginTop: '2%' }}>
+        style={{ marginTop: '1%' }}>
         <Typography variant="h5" align="center" component="h2">Current Job Prospects</Typography>
         {
           this.props.prospects.map(job => renderJob(job))
@@ -28,7 +28,7 @@ function renderJob(job) {
     <Card
       key={job.id}
       id={job.id}
-      style={{ maxWidth: '50rem', margin: 'auto', marginTop: '1rem' }}>
+      style={{ maxWidth: '50rem', margin: 'auto', marginTop: '0.5rem' }}>
       <CardContent>
         <Typography variant="h6">
           {
