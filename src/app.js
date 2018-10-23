@@ -4,10 +4,13 @@ import JobForm from './job-form'
 import ViewProspects from './view'
 import Navbar from './navbar'
 import hash from './hash'
+import Details from './details'
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
+    const stateJson = localStorage.getItem('current-app-state')
+    const appState = JSON.parse(stateJson) || {}
     const path = hash.parse(location.hash).path
     const params = hash.parse(location.hash).params
     this.state = {
@@ -15,7 +18,7 @@ export default class App extends React.Component {
         path: path,
         params: params
       },
-      prospects: []
+      prospects: appState.prospects || []
     }
     this.saveProspect = this.saveProspect.bind(this)
   }
@@ -26,12 +29,16 @@ export default class App extends React.Component {
         this.setState({ prospects: data })
       })
       .catch(err => console.log(err))
-
     window.addEventListener('hashchange', () => {
       const { path, params } = hash.parse(location.hash)
       this.setState({
         view: { path, params }
       })
+    })
+    window.addEventListener('beforeunload', () => {
+      const { prospects } = this.state
+      const stateJson = JSON.stringify({ prospects })
+      localStorage.setItem('current-app-state', stateJson)
     })
   }
   saveProspect(prospect) {
@@ -48,10 +55,13 @@ export default class App extends React.Component {
       .catch(err => console.log(err))
   }
   renderView() {
-    const { path } = this.state.view
+    const { path, params } = this.state.view
     switch (path) {
       case 'create':
         return <JobForm saveProspect={this.saveProspect} />
+      case 'details':
+        const job = this.state.prospects.find(job => job.id === parseInt(params.uniqueId, 10))
+        return <Details job={job} />
       default:
         return <ViewProspects prospects={this.state.prospects} />
     }

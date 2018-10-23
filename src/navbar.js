@@ -12,6 +12,10 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 
+const styles = {
+  nav: { height: '45px' }
+}
+
 export default class Navbar extends React.Component {
   constructor(props) {
     super(props)
@@ -41,8 +45,8 @@ export default class Navbar extends React.Component {
       }
     ]
     return (
-      <div>
-        <AppBar position="static">
+      <div style={styles.nav}>
+        <AppBar position="fixed">
           <Toolbar>
             <IconButton
               onClick={() => this.toggleDrawer('left', true)}
