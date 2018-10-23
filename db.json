@@ -4,8 +4,40 @@
       "id": 1,
       "company": "Facebook",
       "title": "Software Developer",
-      "description": "None",
-      "details": "None",
+      "description": "Looking for self-starting engineers with strong experience developing sophisticated applications on the iPhone or iPad using the iOS SDK.\nIf you're interested in joining a team of passionate, extremely talented industry veterans in the mobile space, who like to work hard and play hard, we look forward to hearing from you soon!",
+      "details": "MINIMUM QUALIFICATIONS \r Extensive knowledge of object-oriented software development\nExperience building complex applications for the iPhone or iPad using Objective-C / C++ with Cocoa and other frameworks\nMobile application development at the user interface and system levels\nAbility to understand and debug large and complex code bases\nExperience designing clean and maintainable APIs\nExperience with multithreaded programming\nExperience writing unit tests and testable code",
+      "status": "Intrested"
+    },
+    {
+      "id": 2,
+      "company": "Facebook",
+      "title": "Software Developer",
+      "description": "Looking for self-starting engineers with strong experience developing sophisticated applications on the iPhone or iPad using the iOS SDK.\nIf you're interested in joining a team of passionate, extremely talented industry veterans in the mobile space, who like to work hard and play hard, we look forward to hearing from you soon!",
+      "details": "MINIMUM QUALIFICATIONS \r Extensive knowledge of object-oriented software development\nExperience building complex applications for the iPhone or iPad using Objective-C / C++ with Cocoa and other frameworks\nMobile application development at the user interface and system levels\nAbility to understand and debug large and complex code bases\nExperience designing clean and maintainable APIs\nExperience with multithreaded programming\nExperience writing unit tests and testable code",
+      "status": "Intrested"
+    },
+    {
+      "id": 3,
+      "company": "Facebook",
+      "title": "Software Developer",
+      "description": "Looking for self-starting engineers with strong experience developing sophisticated applications on the iPhone or iPad using the iOS SDK.\nIf you're interested in joining a team of passionate, extremely talented industry veterans in the mobile space, who like to work hard and play hard, we look forward to hearing from you soon!",
+      "details": "MINIMUM QUALIFICATIONS \r Extensive knowledge of object-oriented software development\nExperience building complex applications for the iPhone or iPad using Objective-C / C++ with Cocoa and other frameworks\nMobile application development at the user interface and system levels\nAbility to understand and debug large and complex code bases\nExperience designing clean and maintainable APIs\nExperience with multithreaded programming\nExperience writing unit tests and testable code",
+      "status": "Intrested"
+    },
+    {
+      "id": 4,
+      "company": "Facebook",
+      "title": "Software Developer",
+      "description": "Looking for self-starting engineers with strong experience developing sophisticated applications on the iPhone or iPad using the iOS SDK.\nIf you're interested in joining a team of passionate, extremely talented industry veterans in the mobile space, who like to work hard and play hard, we look forward to hearing from you soon!",
+      "details": "MINIMUM QUALIFICATIONS \r Extensive knowledge of object-oriented software development\nExperience building complex applications for the iPhone or iPad using Objective-C / C++ with Cocoa and other frameworks\nMobile application development at the user interface and system levels\nAbility to understand and debug large and complex code bases\nExperience designing clean and maintainable APIs\nExperience with multithreaded programming\nExperience writing unit tests and testable code",
+      "status": "Intrested"
+    },
+    {
+      "id": 5,
+      "company": "Facebook",
+      "title": "Software Developer",
+      "description": "Looking for self-starting engineers with strong experience developing sophisticated applications on the iPhone or iPad using the iOS SDK.\nIf you're interested in joining a team of passionate, extremely talented industry veterans in the mobile space, who like to work hard and play hard, we look forward to hearing from you soon!",
+      "details": "MINIMUM QUALIFICATIONS \r Extensive knowledge of object-oriented software development\nExperience building complex applications for the iPhone or iPad using Objective-C / C++ with Cocoa and other frameworks\nMobile application development at the user interface and system levels\nAbility to understand and debug large and complex code bases\nExperience designing clean and maintainable APIs\nExperience with multithreaded programming\nExperience writing unit tests and testable code",
       "status": "Intrested"
     }
   ]

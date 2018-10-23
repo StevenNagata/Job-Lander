@@ -1,5 +1,7 @@
 import React from 'react'
+import { get } from 'http'
 import JobForm from './job-form'
+import ViewProspects from './view'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -8,6 +10,14 @@ export default class App extends React.Component {
       prospects: []
     }
     this.saveProspect = this.saveProspect.bind(this)
+  }
+  componentDidMount() {
+    fetch('/prospects/', get)
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({ prospects: data })
+      })
+      .catch(err => console.log(err))
   }
   saveProspect(prospect) {
     const jsonProspect = JSON.stringify(prospect)
@@ -25,6 +35,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
+        <ViewProspects prospects={this.state.prospects} />
         <JobForm saveProspect={this.saveProspect} />
       </div>
     )
