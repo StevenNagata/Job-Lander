@@ -30,6 +30,15 @@ const options = [
     value: 'Offered'
   }
 ]
+const styles = {
+  metaform: {
+    maxWidth: '50rem',
+    marginTop: '2%'
+  },
+  grid: {
+    marginTop: '1rem'
+  }
+}
 
 export default class JobForm extends React.Component {
   constructor(props) {
@@ -66,7 +75,7 @@ export default class JobForm extends React.Component {
           justify="center"
           alignItems="center">
           <form
-            style={{ maxWidth: '50rem', marginTop: '2%' }}
+            style={styles.metaform}
             onSubmit={this.handleSubmit}>
             <Typography variant='h5' gutterBottom align='center'>
               Create New Job Prospect
@@ -125,7 +134,7 @@ export default class JobForm extends React.Component {
               ))}
             </TextField>
             <Grid
-              style={{ marginTop: '1rem' }}
+              style={styles.grid}
               container
               direction="row"
               justify="center"

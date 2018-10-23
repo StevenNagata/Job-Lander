@@ -26,6 +26,13 @@ export default class App extends React.Component {
         this.setState({ prospects: data })
       })
       .catch(err => console.log(err))
+
+    window.addEventListener('hashchange', () => {
+      const { path, params } = hash.parse(location.hash)
+      this.setState({
+        view: { path, params }
+      })
+    })
   }
   saveProspect(prospect) {
     const jsonProspect = JSON.stringify(prospect)
@@ -40,12 +47,20 @@ export default class App extends React.Component {
       })
       .catch(err => console.log(err))
   }
+  renderView() {
+    const { path } = this.state.view
+    switch (path) {
+      case 'create':
+        return <JobForm saveProspect={this.saveProspect} />
+      default:
+        return <ViewProspects prospects={this.state.prospects} />
+    }
+  }
   render() {
     return (
       <div>
         <Navbar />
-        <ViewProspects prospects={this.state.prospects} />
-        <JobForm saveProspect={this.saveProspect} />
+        {this.renderView()}
       </div>
     )
   }

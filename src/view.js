@@ -4,6 +4,22 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 
+const styles = {
+  grid: {
+    marginTop: '1%'
+  },
+  card: {
+    maxWidth: '50rem',
+    margin: 'auto',
+    marginTop: '2%'
+  },
+  textarea: {
+    border: 'none',
+    width: '100%',
+    height: '3rem'
+  }
+}
+
 export default class ViewProspects extends React.Component {
   constructor(props) {
     super(props)
@@ -13,8 +29,7 @@ export default class ViewProspects extends React.Component {
   render() {
     return (
       <Grid
-        style={{ marginTop: '1%' }}>
-        {/* <Typography variant="h5" align="center" component="h2">Current Job Prospects</Typography> */}
+        style={styles.grid}>
         {
           this.props.prospects.map(job => renderJob(job))
         }
@@ -28,7 +43,7 @@ function renderJob(job) {
     <Card
       key={job.id}
       id={job.id}
-      style={{ maxWidth: '50rem', margin: 'auto', marginTop: '0.5rem' }}>
+      style={styles.card}>
       <CardContent>
         <Typography variant="h6">
           {
@@ -48,7 +63,7 @@ function renderJob(job) {
 
         <Typography variant="caption">
           Description:
-          <textarea style={{ border: 'none', width: '100%', height: '3rem' }} defaultValue={job.description} readOnly />
+          <textarea style={styles.textarea} defaultValue={job.description} readOnly />
         </Typography>
       </CardContent>
     </Card >
