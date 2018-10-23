@@ -3,11 +3,18 @@ import { get } from 'http'
 import JobForm from './job-form'
 import ViewProspects from './view'
 import Navbar from './navbar'
+import hash from './hash'
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
+    const path = hash.parse(location.hash).path
+    const params = hash.parse(location.hash).params
     this.state = {
+      view: {
+        path: path,
+        params: params
+      },
       prospects: []
     }
     this.saveProspect = this.saveProspect.bind(this)

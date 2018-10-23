@@ -26,6 +26,20 @@ export default class Navbar extends React.Component {
     })
   }
   render() {
+    const links = [
+      {
+        id: 1,
+        href: '#create',
+        value: 'Create Prospect',
+        icon: <AddCircle />
+      },
+      {
+        id: 2,
+        href: '#view',
+        value: 'View Prospects',
+        icon: <Visibility />
+      }
+    ]
     return (
       <div>
         <AppBar position="static">
@@ -45,10 +59,15 @@ export default class Navbar extends React.Component {
                 onClick={() => this.toggleDrawer('left', false)}
                 onKeyDown={() => this.toggleDrawer('left', false)}>
                 <List>
-                  {['Create Prospect', 'View Prsopects'].map((text, index) => (
-                    <ListItem button key={text}>
-                      <ListItemIcon>{index % 2 === 0 ? <AddCircle /> : <Visibility />}</ListItemIcon>
-                      <ListItemText primary={text} />
+                  {links.map(link => (
+                    <ListItem
+                      component='a'
+                      button
+                      key={link.id}
+                      href={link.href}
+                    >
+                      <ListItemIcon>{link.icon}</ListItemIcon>
+                      <ListItemText primary={link.value} />
                     </ListItem>
                   ))}
                 </List>

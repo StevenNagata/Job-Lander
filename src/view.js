@@ -14,7 +14,7 @@ export default class ViewProspects extends React.Component {
     return (
       <Grid
         style={{ marginTop: '1%' }}>
-        <Typography variant="h5" align="center" component="h2">Current Job Prospects</Typography>
+        {/* <Typography variant="h5" align="center" component="h2">Current Job Prospects</Typography> */}
         {
           this.props.prospects.map(job => renderJob(job))
         }
