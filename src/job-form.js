@@ -1,6 +1,5 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
@@ -31,6 +30,10 @@ const options = [
   }
 ]
 const styles = {
+  container: {
+    width: '95%',
+    margin: 'auto'
+  },
   metaform: {
     maxWidth: '50rem',
     marginTop: '2%'
@@ -68,7 +71,7 @@ export default class JobForm extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div style={styles.container}>
         <Grid
           container
           direction="row"
@@ -77,9 +80,6 @@ export default class JobForm extends React.Component {
           <form
             style={styles.metaform}
             onSubmit={this.handleSubmit}>
-            <Typography variant='h5' gutterBottom align='center'>
-              Create New Job Prospect
-            </Typography>
             <TextField
               required
               fullWidth
