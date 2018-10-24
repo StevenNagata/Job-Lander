@@ -46,10 +46,11 @@ export default class Details extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      mobileView: false
+      mobileView: true
     }
   }
   componentDidMount() {
+    console.log(window.innerWidth)
     window.addEventListener('resize', () => {
       if (window.innerWidth < 500) {
         this.setState({ mobileView: true })
