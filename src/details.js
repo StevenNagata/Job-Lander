@@ -3,13 +3,31 @@ import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import Typography from '@material-ui/core/Typography'
 import ArrowBack from '@material-ui/icons/ArrowBack'
+import Edit from '@material-ui/icons/Edit'
 
 const styles = {
-  backMobile: {
+  card: {
+    position: 'relative'
+  },
+  back: {
+    position: 'absolute',
+    left: '5px',
+    top: '5px',
     textDecoration: 'none'
+  },
+  edit: {
+    position: 'absolute',
+    right: '5px',
+    top: '5px'
   },
   container: {
     padding: '0 3%',
+    maxWidth: '50rem',
+    margin: '3% auto',
+    align: 'center'
+  },
+  containerMobile: {
+    padding: '3%',
     maxWidth: '50rem',
     margin: '3% auto',
     align: 'center'
@@ -42,6 +60,7 @@ const styles = {
     marginBottom: '2%'
   }
 }
+
 export default class Details extends React.Component {
   constructor(props) {
     super(props)
@@ -50,15 +69,15 @@ export default class Details extends React.Component {
     }
   }
   componentDidMount() {
-    console.log(window.innerWidth)
     window.addEventListener('resize', () => {
-      if (window.innerWidth < 500) {
+      if (window.innerWidth < 650) {
         this.setState({ mobileView: true })
       }
       else {
         this.setState({ mobileView: false })
       }
     })
+    setTimeout(() => window.dispatchEvent(new Event('resize')), 1500)
   }
   render() {
     if (!this.props.job) {
@@ -67,13 +86,17 @@ export default class Details extends React.Component {
     const { company, title, description, status, details } = this.props.job
     const { mobileView } = this.state
     const textarea = mobileView ? styles.textareaMobile : styles.textarea
+    const container = mobileView ? styles.containerMobile : styles.container
     return (
-      <div style={styles.container}>
-        <Card>
+      <div style={container}>
+        <Card style={styles.card}>
           <a style={styles.back} href='#view'>
             <ArrowBack />
           </a>
-          <Grid style={styles.container} container spacing={0}>
+          <a style={styles.edit}>
+            <Edit />
+          </a>
+          <Grid style={container} container spacing={0}>
             <Grid item xs={12}>
               <Typography variant="h6">{title}</Typography>
             </Grid>
