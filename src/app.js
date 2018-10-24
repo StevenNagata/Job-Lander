@@ -35,11 +35,6 @@ export default class App extends React.Component {
         view: { path, params }
       })
     })
-    window.addEventListener('beforeunload', () => {
-      const { prospects } = this.state
-      const stateJson = JSON.stringify({ prospects })
-      localStorage.setItem('current-app-state', stateJson)
-    })
   }
   saveProspect(prospect) {
     const jsonProspect = JSON.stringify(prospect)
@@ -58,18 +53,27 @@ export default class App extends React.Component {
     const { path, params } = this.state.view
     switch (path) {
       case 'create':
-        return <JobForm saveProspect={this.saveProspect} />
+        return (
+          <div>
+            <Navbar />
+            <JobForm saveProspect={this.saveProspect} />
+          </div>
+        )
       case 'details':
         const job = this.state.prospects.find(job => job.id === parseInt(params.uniqueId, 10))
         return <Details job={job} />
       default:
-        return <ViewProspects prospects={this.state.prospects} />
+        return (
+          <div>
+            <Navbar />
+            <ViewProspects prospects={this.state.prospects} />
+          </div>
+        )
     }
   }
   render() {
     return (
       <div>
-        <Navbar />
         {this.renderView()}
       </div>
     )

@@ -55,13 +55,13 @@ function renderJob(job) {
         <CardContent>
           <Typography variant="h6">
             {
-              job.company
+              job.title
             }
           </Typography>
           <hr />
           <Typography variant="subtitle1">
             {
-              job.title
+              job.company
             }
             <br />
           </Typography>
