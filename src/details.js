@@ -10,6 +10,7 @@ const styles = {
     position: 'relative'
   },
   back: {
+    color: 'black',
     position: 'absolute',
     left: '5px',
     top: '5px',
@@ -27,7 +28,7 @@ const styles = {
     align: 'center'
   },
   containerMobile: {
-    padding: '3%',
+    padding: '15px 3%',
     maxWidth: '50rem',
     margin: '3% auto',
     align: 'center'
@@ -67,6 +68,7 @@ export default class Details extends React.Component {
     this.state = {
       mobileView: true
     }
+    this.handleEdit = this.handleEdit.bind(this)
   }
   componentDidMount() {
     window.addEventListener('resize', () => {
@@ -78,6 +80,9 @@ export default class Details extends React.Component {
       }
     })
     setTimeout(() => window.dispatchEvent(new Event('resize')), 1500)
+  }
+  handleEdit() {
+    this.props.editProspect(this.props.job.id)
   }
   render() {
     if (!this.props.job) {
@@ -93,9 +98,9 @@ export default class Details extends React.Component {
           <a style={styles.back} href='#view'>
             <ArrowBack />
           </a>
-          <a style={styles.edit}>
-            <Edit />
-          </a>
+          <Edit
+            style={styles.edit}
+            onClick={this.handleEdit} />
           <Grid style={container} container spacing={0}>
             <Grid item xs={12}>
               <Typography variant="h6">{title}</Typography>
@@ -114,7 +119,7 @@ export default class Details extends React.Component {
             <textarea style={textarea} defaultValue={details} readOnly />
           </Grid>
         </Card>
-      </div>
+      </div >
     )
   }
 }
