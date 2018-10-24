@@ -17,9 +17,11 @@ const styles = {
     textDecoration: 'none'
   },
   edit: {
+    color: 'black',
     position: 'absolute',
     right: '5px',
-    top: '5px'
+    top: '5px',
+    textDecoration: 'none'
   },
   container: {
     padding: '0 3%',
@@ -68,7 +70,6 @@ export default class Details extends React.Component {
     this.state = {
       mobileView: true
     }
-    this.handleEdit = this.handleEdit.bind(this)
   }
   componentDidMount() {
     window.addEventListener('resize', () => {
@@ -81,14 +82,11 @@ export default class Details extends React.Component {
     })
     setTimeout(() => window.dispatchEvent(new Event('resize')), 1500)
   }
-  handleEdit() {
-    this.props.editProspect(this.props.job.id)
-  }
   render() {
     if (!this.props.job) {
       return null
     }
-    const { company, title, description, status, details } = this.props.job
+    const { id, company, title, description, status, details } = this.props.job
     const { mobileView } = this.state
     const textarea = mobileView ? styles.textareaMobile : styles.textarea
     const container = mobileView ? styles.containerMobile : styles.container
@@ -98,9 +96,9 @@ export default class Details extends React.Component {
           <a style={styles.back} href='#view'>
             <ArrowBack />
           </a>
-          <Edit
-            style={styles.edit}
-            onClick={this.handleEdit} />
+          <a style={styles.edit} href={`#edit?uniqueId=${id}`}>
+            <Edit />
+          </a>
           <Grid style={container} container spacing={0}>
             <Grid item xs={12}>
               <Typography variant="h6">{title}</Typography>

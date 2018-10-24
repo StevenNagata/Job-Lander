@@ -61,7 +61,15 @@ export default class App extends React.Component {
         )
       case 'details':
         const job = this.state.prospects.find(job => job.id === parseInt(params.uniqueId, 10))
-        return <Details job={job} />
+        return <Details job={job} editProspect={this.editProspect} />
+      case 'edit':
+        const currentEditedJob = this.state.prospects.find(job => job.id === parseInt(params.uniqueId, 10))
+        return (
+          <div>
+            <Navbar />
+            <JobForm saveProspect={this.saveEditedProspect} job={currentEditedJob} />
+          </div>
+        )
       default:
         return (
           <div>
