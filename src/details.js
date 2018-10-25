@@ -32,7 +32,7 @@ const styles = {
   },
   back: {
     color: 'white',
-    backgroundColor: '#000000',
+    backgroundColor: '#3B3B3B',
     position: 'absolute',
     bottom: '1rem',
     right: '4.2rem',

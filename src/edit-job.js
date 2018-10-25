@@ -56,7 +56,7 @@ const styles = {
     marginTop: '1rem'
   },
   save: {
-    backgroundColor: '#4FB99F',
+    backgroundColor: '#3B3B3B',
     textDecoration: 'none',
     color: 'white'
   }
