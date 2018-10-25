@@ -76,7 +76,7 @@ export default class EditJobForm extends React.Component {
     this.setState({ status })
   }
   handleSubmit(event) {
-
+    event.preventDefault()
     const updatedProspect = {
       id: this.props.editJob.id,
       company: event.target.company.value,
