@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import ArrowBack from '@material-ui/icons/ArrowBack'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import MenuItem from '@material-ui/core/MenuItem'
+import Card from '@material-ui/core/Paper'
 
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true
 
@@ -32,6 +33,12 @@ const options = [
 ]
 
 const styles = {
+  paper: {
+    position: 'relative',
+    padding: '2rem',
+    maxWidth: '50rem',
+    margin: '3% auto'
+  },
   container: {
     width: '95%',
     margin: 'auto'
@@ -94,84 +101,87 @@ export default class EditJobForm extends React.Component {
     const { title, company, description, details } = this.props.editJob
     return (
       <div style={styles.container}>
-        <a style={styles.back} href={href}>
-          <ArrowBack />
-        </a>
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="center">
-          <form
-            style={styles.metaform}
-            onSubmit={this.handleSubmit}>
-            <TextField
-              required
-              fullWidth
-              id="company"
-              defaultValue={company}
-              label="Company Name"
-              margin="normal"
-            />
-            <TextField
-              required
-              fullWidth
-              id="title"
-              defaultValue={title}
-              label="Job Title"
-              margin="normal"
-            />
-            <TextField
-              id="description"
-              label="Description"
-              fullWidth
-              multiline
-              rows="5"
-              margin="normal"
-              defaultValue={description}
-              variant="filled"
-            />
-            <TextField
-              id="details"
-              label="Details"
-              fullWidth
-              multiline
-              defaultValue={details}
-              rows="5"
-              margin="normal"
-              variant="filled"
-            />
-            <TextField
-              select
-              fullWidth
-              id="status"
-              label="Current Status"
-              value={this.state.status}
-              onChange={this.handleChange}
-              margin="normal"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start"> </InputAdornment>
-                )
-              }}>
-              {options.map(option => (
-                <MenuItem key={option.id} value={option.value}>
-                  {option.value}
-                </MenuItem>
-              ))}
-            </TextField>
-            <Grid
-              style={styles.grid}
-              container
-              direction="row"
-              justify="center"
-              alignItems="flex-start"
-              margin="normal"
-            >
-              <Button type="submit" variant="contained" color="default">Save</Button>
-            </Grid>
-          </form>
-        </Grid>
+        <Card style={styles.card}>
+          <a style={styles.back} href={href}>
+            <ArrowBack />
+          </a>
+          <Grid
+            container
+            spacing={12}
+            direction="row"
+            justify="center"
+            alignItems="center">
+            <form
+              style={styles.metaform}
+              onSubmit={this.handleSubmit}>
+              <TextField
+                required
+                fullWidth
+                id="company"
+                defaultValue={company}
+                label="Company Name"
+                margin="normal"
+              />
+              <TextField
+                required
+                fullWidth
+                id="title"
+                defaultValue={title}
+                label="Job Title"
+                margin="normal"
+              />
+              <TextField
+                id="description"
+                label="Description"
+                fullWidth
+                multiline
+                rows="5"
+                margin="normal"
+                defaultValue={description}
+                variant="filled"
+              />
+              <TextField
+                id="details"
+                label="Details"
+                fullWidth
+                multiline
+                defaultValue={details}
+                rows="5"
+                margin="normal"
+                variant="filled"
+              />
+              <TextField
+                select
+                fullWidth
+                id="status"
+                label="Current Status"
+                value={this.state.status}
+                onChange={this.handleChange}
+                margin="normal"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start"> </InputAdornment>
+                  )
+                }}>
+                {options.map(option => (
+                  <MenuItem key={option.id} value={option.value}>
+                    {option.value}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <Grid
+                style={styles.grid}
+                container
+                direction="row"
+                justify="center"
+                alignItems="flex-start"
+                margin="normal"
+              >
+                <Button type="submit" variant="contained" color="primary">Save</Button>
+              </Grid>
+            </form>
+          </Grid>
+        </Card>
       </div>
     )
   }
