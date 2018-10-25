@@ -43,46 +43,20 @@ const styles = {
   }
 }
 
-export default class JobForm extends React.Component {
+export default class EditJobForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isEdit: this.props.isEdit,
-      status: 'Intrested'
+      status: this.props.status || 'Intrested'
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
-  // componentDidMount() {
-  //   if (this.state.isEdit) {
-  //     const { title, company, description, details, status } = this.props.job
-  //     this.setState({
-  //       title,
-  //       company,
-  //       description,
-  //       details,
-  //       status
-  //     })
-  //   }
-  // }
-  handleChange(event) {
-    const status = event.target.value
-    this.setState({ status })
-  }
-  handleSubmit(event) {
-    event.preventDefault()
-    const newProspect = {
-      company: event.target.company.value,
-      title: event.target.title.value,
-      description: event.target.description.value,
-      details: event.target.details.value,
-      status: event.target.status.value
-    }
-    this.props.saveProspect(newProspect)
-    event.target.reset()
-    this.setState({ status: 'Interested' })
-  }
+
   render() {
+    if (!this.props.editJob) {
+      return null
+    }
+    console.log(this.props)
+    const { title, company, status, description, details } = this.props.editJob
     return (
       <div style={styles.container}>
         <Grid
@@ -97,7 +71,7 @@ export default class JobForm extends React.Component {
               required
               fullWidth
               id="company"
-              placeholder="e.g Dodge's Southern Style"
+              value={company}
               label="Company Name"
               margin="normal"
             />
@@ -105,7 +79,7 @@ export default class JobForm extends React.Component {
               required
               fullWidth
               id="title"
-              placeholder="e.g Software Developer I"
+              value={title}
               label="Job Title"
               margin="normal"
             />
@@ -116,6 +90,7 @@ export default class JobForm extends React.Component {
               multiline
               rows="5"
               margin="normal"
+              value={description}
               variant="filled"
             />
             <TextField
@@ -124,6 +99,7 @@ export default class JobForm extends React.Component {
               fullWidth
               multiline
               rows="5"
+              value={details}
               margin="normal"
               variant="filled"
             />
@@ -132,7 +108,7 @@ export default class JobForm extends React.Component {
               fullWidth
               id="status"
               label="Current Status"
-              value={this.state.status}
+              value={status}
               onChange={this.handleChange}
               margin="normal"
               InputProps={{
@@ -154,7 +130,7 @@ export default class JobForm extends React.Component {
               alignItems="flex-start"
               margin="normal"
             >
-              <Button type="submit" variant="contained" color="default" >Create</Button>
+              <Button type="submit" variant="contained" color="default" >Save</Button>
             </Grid>
           </form>
         </Grid>

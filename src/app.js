@@ -5,6 +5,7 @@ import ViewProspects from './view'
 import Navbar from './navbar'
 import hash from './hash'
 import Details from './details'
+import EditJobForm from './edit-job'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -63,11 +64,10 @@ export default class App extends React.Component {
         const job = this.state.prospects.find(job => job.id === parseInt(params.uniqueId, 10))
         return <Details job={job} editProspect={this.editProspect} />
       case 'edit':
-        const currentEditedJob = this.state.prospects.find(job => job.id === parseInt(params.uniqueId, 10))
+        const editJob = this.state.prospects.find(job => job.id === parseInt(params.uniqueId, 10))
         return (
           <div>
-            <Navbar />
-            <JobForm saveProspect={this.saveEditedProspect} job={currentEditedJob} />
+            <EditJobForm editJob={editJob} />
           </div>
         )
       default:
