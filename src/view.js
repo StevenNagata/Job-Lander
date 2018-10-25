@@ -33,9 +33,11 @@ const styles = {
   },
   description: {
     color: '#07141C',
-    whiteSpace: 'pre-wrap',
+    whiteSpace: 'nowrap',
     lineHeight: '1.25rem',
-    marginTop: '2%'
+    marginTop: '2%',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
   },
   ref: {
     textDecoration: 'none',
