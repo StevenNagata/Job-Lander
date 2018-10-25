@@ -89,7 +89,6 @@ function renderJob(job) {
           <Typography variant="caption" style={styles.status}>
             Status: {job.status}
           </Typography>
-
           <Typography style={styles.description}>{job.description}</Typography>
         </CardContent>
       </Card >

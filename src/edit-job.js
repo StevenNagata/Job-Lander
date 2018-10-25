@@ -43,7 +43,7 @@ const styles = {
     position: 'relative',
     padding: '1.5rem',
     maxWidth: '50rem',
-    margin: '3% auto'
+    margin: '5% auto'
   },
   container: {
     width: '95%',

@@ -4,6 +4,7 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
+import Card from '@material-ui/core/Paper'
 
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true
 
@@ -31,8 +32,17 @@ const options = [
 ]
 const styles = {
   container: {
-    width: '95%',
-    margin: 'auto'
+    backgroundColor: '#E8F1F3',
+    padding: '0',
+    position: 'absolute',
+    width: '100vw',
+    height: '100vh'
+  },
+  card: {
+    position: 'relative',
+    padding: '1.5rem',
+    maxWidth: '50rem',
+    margin: '5% auto'
   },
   metaform: {
     maxWidth: '50rem',
@@ -40,6 +50,10 @@ const styles = {
   },
   grid: {
     marginTop: '1rem'
+  },
+  save: {
+    color: 'white',
+    backgroundColor: '#3B3B3B'
   }
 }
 
@@ -72,79 +86,81 @@ export default class JobForm extends React.Component {
   render() {
     return (
       <div style={styles.container}>
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="center">
-          <form
-            style={styles.metaform}
-            onSubmit={this.handleSubmit}>
-            <TextField
-              required
-              fullWidth
-              id="company"
-              placeholder="e.g Dodge's Southern Style"
-              label="Company Name"
-              margin="normal"
-            />
-            <TextField
-              required
-              fullWidth
-              id="title"
-              placeholder="e.g Software Developer I"
-              label="Job Title"
-              margin="normal"
-            />
-            <TextField
-              id="description"
-              label="Description"
-              fullWidth
-              multiline
-              rows="5"
-              margin="normal"
-              variant="filled"
-            />
-            <TextField
-              id="details"
-              label="Details"
-              fullWidth
-              multiline
-              rows="5"
-              margin="normal"
-              variant="filled"
-            />
-            <TextField
-              select
-              fullWidth
-              id="status"
-              label="Current Status"
-              value={this.state.status}
-              onChange={this.handleChange}
-              margin="normal"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start"> </InputAdornment>
-                )
-              }}>
-              {options.map(option => (
-                <MenuItem key={option.id} value={option.value}>
-                  {option.value}
-                </MenuItem>
-              ))}
-            </TextField>
-            <Grid
-              style={styles.grid}
-              container
-              direction="row"
-              justify="center"
-              alignItems="flex-start"
-              margin="normal"
-            >
-              <Button type="submit" variant="contained" color="default" >Create</Button>
-            </Grid>
-          </form>
-        </Grid>
+        <Card style={styles.card}>
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center">
+            <form
+              style={styles.metaform}
+              onSubmit={this.handleSubmit}>
+              <TextField
+                required
+                fullWidth
+                id="company"
+                placeholder="e.g Dodge's Southern Style"
+                label="Company Name"
+                margin="normal"
+              />
+              <TextField
+                required
+                fullWidth
+                id="title"
+                placeholder="e.g Software Developer I"
+                label="Job Title"
+                margin="normal"
+              />
+              <TextField
+                id="description"
+                label="Description"
+                fullWidth
+                multiline
+                rows="5"
+                margin="normal"
+                variant="filled"
+              />
+              <TextField
+                id="details"
+                label="Details"
+                fullWidth
+                multiline
+                rows="5"
+                margin="normal"
+                variant="filled"
+              />
+              <TextField
+                select
+                fullWidth
+                id="status"
+                label="Current Status"
+                value={this.state.status}
+                onChange={this.handleChange}
+                margin="normal"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start"> </InputAdornment>
+                  )
+                }}>
+                {options.map(option => (
+                  <MenuItem key={option.id} value={option.value}>
+                    {option.value}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <Grid
+                style={styles.grid}
+                container
+                direction="row"
+                justify="center"
+                alignItems="flex-start"
+                margin="normal"
+              >
+                <Button style={styles.save} type="submit" variant="fab" aria-label="Edit">Save</Button>
+              </Grid>
+            </form>
+          </Grid>
+        </Card>
       </div>
     )
   }

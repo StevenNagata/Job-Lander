@@ -6,41 +6,9 @@ import Button from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon'
 
 const styles = {
-  editMobile: {
-    color: 'white',
-    backgroundColor: '#4FB99F',
-    position: 'fixed',
-    bottom: '1rem',
-    right: '1rem',
-    zIndex: '3'
-  },
-  edit: {
-    color: 'white',
-    backgroundColor: '#4FB99F',
-    position: 'absolute',
-    bottom: '1rem',
-    right: '1rem',
-    zIndex: '3'
-  },
-  backMobile: {
-    color: 'white',
-    backgroundColor: '#000000',
-    position: 'fixed',
-    bottom: '1rem',
-    right: '4.2rem',
-    zIndex: '3'
-  },
-  back: {
-    color: 'white',
-    backgroundColor: '#3B3B3B',
-    position: 'absolute',
-    bottom: '1rem',
-    right: '4.2rem',
-    zIndex: '3'
-  },
   parentContainer: {
     backgroundColor: '#E8F1F3',
-    padding: '0',
+    padding: '1% auto',
     position: 'absolute',
     width: '100vw',
     height: '100vh'
@@ -53,7 +21,7 @@ const styles = {
   container: {
     padding: '0 3%',
     maxWidth: '50rem',
-    margin: '3% auto',
+    margin: '5% auto',
     align: 'center'
   },
   title: {
@@ -86,24 +54,10 @@ export default class Details extends React.Component {
       mobileView: true
     }
   }
-  componentDidMount() {
-    window.addEventListener('resize', () => {
-      if (window.innerWidth < 650) {
-        this.setState({ mobileView: true })
-      }
-      else {
-        this.setState({ mobileView: false })
-      }
-    })
-    dispatchEvent(new Event('resize'))
-  }
   render() {
     if (!this.props.job) {
       return null
     }
-    const edit = this.state.mobileView ? styles.editMobile : styles.edit
-    const back = this.state.mobileView ? styles.backMobile : styles.back
-
     const { id, company, title, description, status, details } = this.props.job
     return (
       <div style={styles.parentContainer}>
@@ -134,10 +88,7 @@ export default class Details extends React.Component {
               <Typography style={styles.paragraph}>{details}</Typography>
             </Grid>
           </Grid>
-          <Button href={'#view'} style={back} variant="fab" aria-label="Edit">
-            <Icon><strong>arrow_back</strong></Icon>
-          </Button>
-          <Button href={`#edit?uniqueId=${id}`} style={edit} variant="fab" aria-label="Edit">
+          <Button id="editButton" href={`#edit?uniqueId=${id}`} variant="fab" aria-label="Edit">
             <Icon>edit_icon</Icon>
           </Button>
         </Card>
