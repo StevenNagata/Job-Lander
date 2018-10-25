@@ -83,6 +83,7 @@ export default class Details extends React.Component {
     dispatchEvent(new Event('resize'))
   }
   render() {
+    console.log(this.props.job)
     if (!this.props.job) {
       return null
     }

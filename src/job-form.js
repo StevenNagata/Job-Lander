@@ -47,24 +47,11 @@ export default class JobForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isEdit: this.props.isEdit,
       status: 'Intrested'
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  // componentDidMount() {
-  //   if (this.state.isEdit) {
-  //     const { title, company, description, details, status } = this.props.job
-  //     this.setState({
-  //       title,
-  //       company,
-  //       description,
-  //       details,
-  //       status
-  //     })
-  //   }
-  // }
   handleChange(event) {
     const status = event.target.value
     this.setState({ status })
