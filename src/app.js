@@ -69,7 +69,9 @@ export default class App extends React.Component {
         return updated
       })
       .then(prospects => {
-        this.setState({ prospects })
+        this.setState({ prospects }, () => {
+          location.hash = `#details?uniqueId=${updatedProspect.id}`
+        })
       })
       .catch(err => console.log(err))
   }

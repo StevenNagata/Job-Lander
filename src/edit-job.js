@@ -168,7 +168,7 @@ export default class EditJobForm extends React.Component {
               alignItems="flex-start"
               margin="normal"
             >
-              <Button type="submit" variant="contained" color="default" >Save</Button>
+              <Button type="submit" variant="contained" color="default">Save</Button>
             </Grid>
           </form>
         </Grid>
