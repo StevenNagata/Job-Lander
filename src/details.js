@@ -2,26 +2,53 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import Typography from '@material-ui/core/Typography'
-import ArrowBack from '@material-ui/icons/ArrowBack'
-import Edit from '@material-ui/icons/Edit'
+import Button from '@material-ui/core/Button'
+import Icon from '@material-ui/core/Icon'
 
 const styles = {
-  card: {
-    position: 'relative'
-  },
-  back: {
-    color: 'black',
-    position: 'absolute',
-    left: '5px',
-    top: '5px',
-    textDecoration: 'none'
+  editMobile: {
+    color: 'white',
+    backgroundColor: '#4FB99F',
+    position: 'fixed',
+    bottom: '1rem',
+    right: '1rem',
+    zIndex: '3'
   },
   edit: {
-    color: 'black',
+    color: 'white',
+    backgroundColor: '#4FB99F',
     position: 'absolute',
-    right: '5px',
-    top: '5px',
-    textDecoration: 'none'
+    bottom: '1rem',
+    right: '1rem',
+    zIndex: '3'
+  },
+  backMobile: {
+    color: 'white',
+    backgroundColor: '#000000',
+    position: 'fixed',
+    bottom: '1rem',
+    right: '4.2rem',
+    zIndex: '3'
+  },
+  back: {
+    color: 'white',
+    backgroundColor: '#000000',
+    position: 'absolute',
+    bottom: '1rem',
+    right: '4.2rem',
+    zIndex: '3'
+  },
+  parentContainer: {
+    backgroundColor: '#E8F1F3',
+    padding: '0',
+    position: 'absolute',
+    width: '100vw',
+    height: '100vh'
+  },
+  card: {
+    maxWidth: '50rem',
+    margin: '3% auto',
+    position: 'relative'
   },
   container: {
     padding: '0 3%',
@@ -29,38 +56,26 @@ const styles = {
     margin: '3% auto',
     align: 'center'
   },
-  containerMobile: {
-    padding: '15px 3%',
-    maxWidth: '50rem',
-    margin: '3% auto',
-    align: 'center'
-  },
-  status: {
-    paddingBottom: '3%'
+  title: {
+    fontSize: '1.4rem',
+    color: '#022829',
+    lineHeight: '2rem'
   },
   company: {
-    position: 'relative',
-    bottom: '10px'
+    fontSize: '1rem',
+    color: '#4B4C4C',
+    lineHeight: '1rem'
   },
-  textareaMobile: {
-    position: 'relative',
-    left: '5%',
-    fontSize: '0.6rem',
-    border: 'none',
-    width: '90%',
-    height: '5rem',
-    padding: '3%',
-    marginBottom: '2%'
+  status: {
+    fontSize: '0.8rem',
+    marginTop: '0',
+    color: '#7A7C7D'
   },
-  textarea: {
-    position: 'relative',
-    left: '5%',
-    fontSize: '0.6rem',
-    border: 'none',
-    width: '90%',
-    height: 'auto',
-    padding: '3%',
-    marginBottom: '2%'
+  paragraph: {
+    color: '#07141C',
+    fontSize: '0.7rem',
+    margin: '2% auto',
+    whiteSpace: 'pre-wrap'
   }
 }
 
@@ -86,36 +101,45 @@ export default class Details extends React.Component {
     if (!this.props.job) {
       return null
     }
+    const edit = this.state.mobileView ? styles.editMobile : styles.edit
+    const back = this.state.mobileView ? styles.backMobile : styles.back
+
     const { id, company, title, description, status, details } = this.props.job
-    const { mobileView } = this.state
-    const textarea = mobileView ? styles.textareaMobile : styles.textarea
-    const container = mobileView ? styles.containerMobile : styles.container
     return (
-      <div style={container}>
+      <div style={styles.parentContainer}>
         <Card style={styles.card}>
-          <a style={styles.back} href='#view'>
-            <ArrowBack />
-          </a>
-          <a style={styles.edit} href={`#edit?uniqueId=${id}`}>
-            <Edit />
-          </a>
-          <Grid style={container} container spacing={0}>
+          <Grid style={styles.container} container spacing={0}>
             <Grid item xs={12}>
-              <Typography variant="h6">{title}</Typography>
+              <Typography style={styles.title} variant="h6">{title}</Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="body2" style={styles.company}>{company}</Typography>
             </Grid>
             <Grid item xs={12}>
+              <hr />
+            </Grid>
+            <Grid item xs={12}>
               <Typography variant="overline" style={styles.status}>Status: {status}</Typography>
             </Grid>
             <Grid item xs={12}>
-              <Typography variant="body2">Descrption:</Typography>
+              <Typography variant="body2"><strong>Descrption:</strong></Typography>
             </Grid>
-            <textarea style={textarea} defaultValue={description} readOnly />
-            <Typography variant="body2">Details:</Typography>
-            <textarea style={textarea} defaultValue={details} readOnly />
+            <Grid>
+              <Typography style={styles.paragraph}>{description}</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="body2"><strong>Details:</strong></Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography style={styles.paragraph}>{details}</Typography>
+            </Grid>
           </Grid>
+          <Button href={'#view'} style={back} variant="fab" aria-label="Edit">
+            <Icon><strong>arrow_back</strong></Icon>
+          </Button>
+          <Button href={`#edit?uniqueId=${id}`} style={edit} variant="fab" aria-label="Edit">
+            <Icon>edit_icon</Icon>
+          </Button>
         </Card>
       </div >
     )

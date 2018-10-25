@@ -2,7 +2,6 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
-import ArrowBack from '@material-ui/icons/ArrowBack'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import MenuItem from '@material-ui/core/MenuItem'
 import Card from '@material-ui/core/Paper'
@@ -33,6 +32,13 @@ const options = [
 ]
 
 const styles = {
+  parentContainer: {
+    backgroundColor: '#E8F1F3',
+    padding: '0',
+    position: 'absolute',
+    width: '100vw',
+    height: '100vh'
+  },
   card: {
     position: 'relative',
     padding: '1.5rem',
@@ -43,13 +49,6 @@ const styles = {
     width: '95%',
     margin: 'auto'
   },
-  back: {
-    color: 'black',
-    position: 'absolute',
-    left: '5px',
-    top: '5px',
-    textDecoration: 'none'
-  },
   metaform: {
     maxWidth: '50rem'
   },
@@ -57,8 +56,9 @@ const styles = {
     marginTop: '1rem'
   },
   save: {
+    backgroundColor: '#4FB99F',
     textDecoration: 'none',
-    color: 'black'
+    color: 'white'
   }
 }
 
@@ -96,17 +96,13 @@ export default class EditJobForm extends React.Component {
     if (!this.props.editJob) {
       return null
     }
-    const href = `#details?uniqueId=${this.props.editJob.id}`
     const { title, company, description, details } = this.props.editJob
     return (
-      <div style={styles.container}>
+      <div style={styles.parentContainer}>
         <Card style={styles.card}>
-          <a style={styles.back} href={href}>
-            <ArrowBack />
-          </a>
           <Grid
             container
-            spacing={12}
+            spacing={16}
             direction="row"
             justify="center"
             alignItems="center">
@@ -176,7 +172,7 @@ export default class EditJobForm extends React.Component {
                 alignItems="flex-start"
                 margin="normal"
               >
-                <Button type="submit" variant="contained" color="primary">Save</Button>
+                <Button type="submit" style={styles.save} variant="fab">Save</Button>
               </Grid>
             </form>
           </Grid>
