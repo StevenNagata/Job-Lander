@@ -33,9 +33,9 @@ const options = [
 ]
 
 const styles = {
-  paper: {
+  card: {
     position: 'relative',
-    padding: '2rem',
+    padding: '1.5rem',
     maxWidth: '50rem',
     margin: '3% auto'
   },
@@ -51,8 +51,7 @@ const styles = {
     textDecoration: 'none'
   },
   metaform: {
-    maxWidth: '50rem',
-    marginTop: '2%'
+    maxWidth: '50rem'
   },
   grid: {
     marginTop: '1rem'
