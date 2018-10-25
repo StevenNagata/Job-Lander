@@ -80,7 +80,7 @@ export default class Details extends React.Component {
         this.setState({ mobileView: false })
       }
     })
-    setTimeout(() => window.dispatchEvent(new Event('resize')), 1500)
+    dispatchEvent(new Event('resize'))
   }
   render() {
     if (!this.props.job) {
