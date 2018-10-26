@@ -104,7 +104,7 @@ export default class Details extends React.Component {
                 <Typography variant="body2"><strong>Timeline:</strong></Typography>
               </Grid>
               <Grid style={styles.addEventGrid} item xs={12}>
-                <Button style={styles.addEvent}>Add Event</Button>
+                <Button style={styles.addEvent} href={`#newevent?uniqueId=${this.props.job.id}`}>Add Event</Button>
               </Grid>
             </Grid>
             <Button id="editButton" href={`#edit?uniqueId=${id}`} variant="fab" aria-label="Edit">
