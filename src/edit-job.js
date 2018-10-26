@@ -6,6 +6,8 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import MenuItem from '@material-ui/core/MenuItem'
 import Card from '@material-ui/core/Paper'
 import Icon from '@material-ui/core/Icon'
+import Typography from '@material-ui/core/Typography'
+import Modal from '@material-ui/core/Modal'
 
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true
 
@@ -68,6 +70,26 @@ const styles = {
     backgroundColor: '#3B3B3B',
     textDecoration: 'none',
     color: 'white'
+  },
+  modal: {
+    position: 'relative',
+    top: '10rem',
+    margin: '0 auto',
+    padding: '1rem',
+    width: '15rem',
+    backgroundColor: '#E8F1F3',
+    boxShadow: '#068587',
+    textAlign: 'center'
+  },
+  cancel: {
+    color: 'white',
+    margin: '0.3rem',
+    backgroundColor: '#505959'
+  },
+  confirmDelete: {
+    color: 'white',
+    margin: '0.3rem',
+    backgroundColor: '#ed553b'
   }
 }
 
@@ -75,10 +97,13 @@ export default class EditJobForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      status: this.props.editJob.status
+      status: this.props.editJob.status,
+      open: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleOpen = this.handleOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
   handleChange(event) {
     const status = event.target.value
@@ -96,6 +121,12 @@ export default class EditJobForm extends React.Component {
     }
     this.props.saveUpdate(updatedProspect)
   }
+  handleOpen() {
+    this.setState({ open: true })
+  }
+  handleClose() {
+    this.setState({ open: false })
+  }
   componentDidUpdate(prevProps) {
     if (this.props.editJob !== prevProps.editJob) {
       this.setState({ status: this.props.editJob.status })
@@ -109,7 +140,7 @@ export default class EditJobForm extends React.Component {
     return (
       <div style={styles.parentContainer}>
         <Card style={styles.card}>
-          <Button style={styles.deleteButton} variant="fab" aria-label="Edit">
+          <Button onClick={this.handleOpen} style={styles.deleteButton} variant="fab" aria-label="Edit">
             <Icon>delete_icon</Icon>
           </Button>
           <Grid
@@ -189,6 +220,20 @@ export default class EditJobForm extends React.Component {
             </form>
           </Grid>
         </Card>
+        <Modal
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          open={this.state.open}
+          onClose={this.handleClose}
+        >
+          <div style={styles.modal}>
+            <Typography variant="subtitle1" id="modal-title">
+              Are you sure you want to delete this job prospect?
+            </Typography>
+            <Button style={styles.cancel} onClick={this.handleClose} aria-label="cancel">Cancel</Button>
+            <Button style={styles.confirmDelete} aria-label="delete">Delete</Button>
+          </div>
+        </Modal>
       </div>
     )
   }
