@@ -121,7 +121,7 @@ export default class App extends React.Component {
       case 'newevent':
         const jobId = parseInt(params.uniqueId, 10)
         return (
-          <EventForm jobId={jobId}/>
+          <EventForm jobId={jobId} />
         )
       default:
         return (
