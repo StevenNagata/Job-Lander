@@ -18,6 +18,7 @@ export default class App extends React.Component {
         path: path,
         params: params
       },
+      events: [],
       prospects: []
     }
     this.saveProspect = this.saveProspect.bind(this)
@@ -29,6 +30,12 @@ export default class App extends React.Component {
       .then(resp => resp.json())
       .then(data => {
         this.setState({ prospects: data })
+      })
+      .catch(err => console.log(err))
+    fetch('/events/', get)
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({ events: data })
       })
       .catch(err => console.log(err))
     window.addEventListener('hashchange', () => {
