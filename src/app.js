@@ -5,12 +5,11 @@ import ViewProspects from './view'
 import Navbar from './navbar'
 import hash from './hash'
 import Details from './details'
+import EditJobForm from './edit-job'
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-    const stateJson = localStorage.getItem('current-app-state')
-    const appState = JSON.parse(stateJson) || {}
     const path = hash.parse(location.hash).path
     const params = hash.parse(location.hash).params
     this.state = {
@@ -18,9 +17,10 @@ export default class App extends React.Component {
         path: path,
         params: params
       },
-      prospects: appState.prospects || []
+      prospects: []
     }
     this.saveProspect = this.saveProspect.bind(this)
+    this.saveUpdatedProspect = this.saveUpdatedProspect.bind(this)
   }
   componentDidMount() {
     fetch('/prospects/', get)
@@ -49,6 +49,32 @@ export default class App extends React.Component {
       })
       .catch(err => console.log(err))
   }
+  saveUpdatedProspect(updatedProspect) {
+    const jsonProspect = JSON.stringify(updatedProspect)
+    fetch(`/prospects/${updatedProspect.id}`, {
+      method: 'put',
+      headers: { 'content-type': 'application/json' },
+      body: jsonProspect
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        const updated = this.state.prospects.map(job => {
+          if (data.id === job.id) {
+            return data
+          }
+          else {
+            return job
+          }
+        })
+        return updated
+      })
+      .then(prospects => {
+        this.setState({ prospects }, () => {
+          location.hash = `#details?uniqueId=${updatedProspect.id}`
+        })
+      })
+      .catch(err => console.log(err))
+  }
   renderView() {
     const { path, params } = this.state.view
     switch (path) {
@@ -61,7 +87,22 @@ export default class App extends React.Component {
         )
       case 'details':
         const job = this.state.prospects.find(job => job.id === parseInt(params.uniqueId, 10))
-        return <Details job={job} />
+        return (
+          <div>
+            <Navbar />
+            <Details job={job} editProspect={this.editProspect} />
+          </div>
+        )
+      case 'edit':
+        const editJob = this.state.prospects.find(job => job.id === parseInt(params.uniqueId, 10))
+        if (!editJob) {
+          return null
+        }
+        return (
+          <div>
+            <EditJobForm editJob={editJob} saveUpdate={this.saveUpdatedProspect} />
+          </div>
+        )
       default:
         return (
           <div>

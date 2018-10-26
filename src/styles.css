@@ -1,0 +1,19 @@
+#editButton {
+  color: white;
+  background-color: #4fb99f;
+  position: absolute;
+  bottom: 3%;
+  right: 3%;
+  z-index: 3;
+}
+
+@media (max-width: 700px) {
+  #editButton {
+    color: white;
+    background-color: #4fb99f;
+    position: fixed;
+    bottom: 3%;
+    right: 3%;
+    z-index: 3;
+  }
+}

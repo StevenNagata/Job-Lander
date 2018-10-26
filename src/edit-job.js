@@ -1,9 +1,9 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import MenuItem from '@material-ui/core/MenuItem'
 import Card from '@material-ui/core/Paper'
 
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true
@@ -30,8 +30,9 @@ const options = [
     value: 'Offered'
   }
 ]
+
 const styles = {
-  container: {
+  parentContainer: {
     backgroundColor: '#E8F1F3',
     padding: '0',
     position: 'absolute',
@@ -44,24 +45,28 @@ const styles = {
     maxWidth: '50rem',
     margin: '5% auto'
   },
+  container: {
+    width: '95%',
+    margin: 'auto'
+  },
   metaform: {
-    maxWidth: '50rem',
-    marginTop: '2%'
+    maxWidth: '50rem'
   },
   grid: {
     marginTop: '1rem'
   },
   save: {
-    color: 'white',
-    backgroundColor: '#3B3B3B'
+    backgroundColor: '#3B3B3B',
+    textDecoration: 'none',
+    color: 'white'
   }
 }
 
-export default class JobForm extends React.Component {
+export default class EditJobForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      status: 'Intrested'
+      status: this.props.editJob.status
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -72,23 +77,32 @@ export default class JobForm extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault()
-    const newProspect = {
+    const updatedProspect = {
+      id: this.props.editJob.id,
       company: event.target.company.value,
       title: event.target.title.value,
       description: event.target.description.value,
       details: event.target.details.value,
       status: event.target.status.value
     }
-    this.props.saveProspect(newProspect)
-    event.target.reset()
-    this.setState({ status: 'Interested' })
+    this.props.saveUpdate(updatedProspect)
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.editJob !== prevProps.editJob) {
+      this.setState({ status: this.props.editJob.status })
+    }
   }
   render() {
+    if (!this.props.editJob) {
+      return null
+    }
+    const { title, company, description, details } = this.props.editJob
     return (
-      <div style={styles.container}>
+      <div style={styles.parentContainer}>
         <Card style={styles.card}>
           <Grid
             container
+            spacing={16}
             direction="row"
             justify="center"
             alignItems="center">
@@ -99,7 +113,7 @@ export default class JobForm extends React.Component {
                 required
                 fullWidth
                 id="company"
-                placeholder="e.g Dodge's Southern Style"
+                defaultValue={company}
                 label="Company Name"
                 margin="normal"
               />
@@ -107,7 +121,7 @@ export default class JobForm extends React.Component {
                 required
                 fullWidth
                 id="title"
-                placeholder="e.g Software Developer I"
+                defaultValue={title}
                 label="Job Title"
                 margin="normal"
               />
@@ -118,6 +132,7 @@ export default class JobForm extends React.Component {
                 multiline
                 rows="5"
                 margin="normal"
+                defaultValue={description}
                 variant="filled"
               />
               <TextField
@@ -125,6 +140,7 @@ export default class JobForm extends React.Component {
                 label="Details"
                 fullWidth
                 multiline
+                defaultValue={details}
                 rows="5"
                 margin="normal"
                 variant="filled"
@@ -156,7 +172,7 @@ export default class JobForm extends React.Component {
                 alignItems="flex-start"
                 margin="normal"
               >
-                <Button style={styles.save} type="submit" variant="fab" aria-label="Edit">Save</Button>
+                <Button type="submit" style={styles.save} variant="fab">Save</Button>
               </Grid>
             </form>
           </Grid>

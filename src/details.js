@@ -2,46 +2,51 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import Typography from '@material-ui/core/Typography'
-import ArrowBack from '@material-ui/icons/ArrowBack'
+import Button from '@material-ui/core/Button'
+import Icon from '@material-ui/core/Icon'
 
 const styles = {
-  backMobile: {
-    textDecoration: 'none'
+  parentContainer: {
+    backgroundColor: '#E8F1F3',
+    padding: '1% auto',
+    position: 'absolute',
+    width: '100vw',
+    height: '100vh'
+  },
+  card: {
+    maxWidth: '50rem',
+    margin: '3% auto',
+    position: 'relative'
   },
   container: {
     padding: '0 3%',
     maxWidth: '50rem',
-    margin: '3% auto',
+    margin: '5% auto',
     align: 'center'
   },
-  status: {
-    paddingBottom: '3%'
+  title: {
+    fontSize: '1.4rem',
+    color: '#022829',
+    lineHeight: '2rem'
   },
   company: {
-    position: 'relative',
-    bottom: '10px'
+    fontSize: '1rem',
+    color: '#4B4C4C',
+    lineHeight: '1rem'
   },
-  textareaMobile: {
-    position: 'relative',
-    left: '5%',
-    fontSize: '0.6rem',
-    border: 'none',
-    width: '90%',
-    height: '5rem',
-    padding: '3%',
-    marginBottom: '2%'
+  status: {
+    fontSize: '0.8rem',
+    marginTop: '0',
+    color: '#7A7C7D'
   },
-  textarea: {
-    position: 'relative',
-    left: '5%',
-    fontSize: '0.6rem',
-    border: 'none',
-    width: '90%',
-    height: 'auto',
-    padding: '3%',
-    marginBottom: '2%'
+  paragraph: {
+    color: '#07141C',
+    fontSize: '0.7rem',
+    margin: '2% auto',
+    whiteSpace: 'pre-wrap'
   }
 }
+
 export default class Details extends React.Component {
   constructor(props) {
     super(props)
@@ -49,49 +54,45 @@ export default class Details extends React.Component {
       mobileView: true
     }
   }
-  componentDidMount() {
-    console.log(window.innerWidth)
-    window.addEventListener('resize', () => {
-      if (window.innerWidth < 500) {
-        this.setState({ mobileView: true })
-      }
-      else {
-        this.setState({ mobileView: false })
-      }
-    })
-  }
   render() {
     if (!this.props.job) {
       return null
     }
-    const { company, title, description, status, details } = this.props.job
-    const { mobileView } = this.state
-    const textarea = mobileView ? styles.textareaMobile : styles.textarea
+    const { id, company, title, description, status, details } = this.props.job
     return (
-      <div style={styles.container}>
-        <Card>
-          <a style={styles.back} href='#view'>
-            <ArrowBack />
-          </a>
+      <div style={styles.parentContainer}>
+        <Card style={styles.card}>
           <Grid style={styles.container} container spacing={0}>
             <Grid item xs={12}>
-              <Typography variant="h6">{title}</Typography>
+              <Typography style={styles.title} variant="h6">{title}</Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="body2" style={styles.company}>{company}</Typography>
             </Grid>
             <Grid item xs={12}>
+              <hr />
+            </Grid>
+            <Grid item xs={12}>
               <Typography variant="overline" style={styles.status}>Status: {status}</Typography>
             </Grid>
             <Grid item xs={12}>
-              <Typography variant="body2">Descrption:</Typography>
+              <Typography variant="body2"><strong>Descrption:</strong></Typography>
             </Grid>
-            <textarea style={textarea} defaultValue={description} readOnly />
-            <Typography variant="body2">Details:</Typography>
-            <textarea style={textarea} defaultValue={details} readOnly />
+            <Grid>
+              <Typography style={styles.paragraph}>{description}</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="body2"><strong>Details:</strong></Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography style={styles.paragraph}>{details}</Typography>
+            </Grid>
           </Grid>
+          <Button id="editButton" href={`#edit?uniqueId=${id}`} variant="fab" aria-label="Edit">
+            <Icon>edit_icon</Icon>
+          </Button>
         </Card>
-      </div>
+      </div >
     )
   }
 }

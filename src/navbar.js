@@ -7,13 +7,19 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Visibility from '@material-ui/icons/Visibility'
 import AddCircle from '@material-ui/icons/AddCircle'
 import IconButton from '@material-ui/core/IconButton'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
+import MenuIcon from '@material-ui/icons/Menu'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 
 const styles = {
-  nav: { height: '45px' }
+  nav: {
+    height: '45px'
+  },
+  appBar: {
+    backgroundColor: '#068587'
+  }
+
 }
 
 export default class Navbar extends React.Component {
@@ -46,12 +52,12 @@ export default class Navbar extends React.Component {
     ]
     return (
       <div style={styles.nav}>
-        <AppBar position="fixed">
+        <AppBar position="fixed" style={styles.appBar}>
           <Toolbar>
             <IconButton
               onClick={() => this.toggleDrawer('left', true)}
             >
-              <MoreVertIcon />
+              <MenuIcon />
             </IconButton>
             <Typography variant="h5" color="inherit">
               Job Lander
