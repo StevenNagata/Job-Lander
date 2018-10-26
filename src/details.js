@@ -8,14 +8,15 @@ import Icon from '@material-ui/core/Icon'
 const styles = {
   parentContainer: {
     backgroundColor: '#E8F1F3',
-    padding: '1% auto',
+    padding: '2% auto',
     position: 'absolute',
     width: '100vw',
     height: '100vh'
   },
   card: {
     maxWidth: '50rem',
-    margin: '3% auto',
+    padding: '0 2%',
+    margin: '5% auto',
     position: 'relative'
   },
   container: {
@@ -44,6 +45,9 @@ const styles = {
     fontSize: '0.7rem',
     margin: '2% auto',
     whiteSpace: 'pre-wrap'
+  },
+  center: {
+    margin: '2%'
   }
 }
 
@@ -61,37 +65,39 @@ export default class Details extends React.Component {
     const { id, company, title, description, status, details } = this.props.job
     return (
       <div style={styles.parentContainer}>
-        <Card style={styles.card}>
-          <Grid style={styles.container} container spacing={0}>
-            <Grid item xs={12}>
-              <Typography style={styles.title} variant="h6">{title}</Typography>
+        <div style={styles.center}>
+          <Card style={styles.card}>
+            <Grid style={styles.container} container spacing={0}>
+              <Grid item xs={12}>
+                <Typography style={styles.title} variant="h6">{title}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body2" style={styles.company}>{company}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <hr />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="overline" style={styles.status}>Status: {status}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body2"><strong>Descrption:</strong></Typography>
+              </Grid>
+              <Grid>
+                <Typography style={styles.paragraph}>{description}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body2"><strong>Details:</strong></Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography style={styles.paragraph}>{details}</Typography>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <Typography variant="body2" style={styles.company}>{company}</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <hr />
-            </Grid>
-            <Grid item xs={12}>
-              <Typography variant="overline" style={styles.status}>Status: {status}</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography variant="body2"><strong>Descrption:</strong></Typography>
-            </Grid>
-            <Grid>
-              <Typography style={styles.paragraph}>{description}</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography variant="body2"><strong>Details:</strong></Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography style={styles.paragraph}>{details}</Typography>
-            </Grid>
-          </Grid>
-          <Button id="editButton" href={`#edit?uniqueId=${id}`} variant="fab" aria-label="Edit">
-            <Icon>edit_icon</Icon>
-          </Button>
-        </Card>
+            <Button id="editButton" href={`#edit?uniqueId=${id}`} variant="fab" aria-label="Edit">
+              <Icon>edit_icon</Icon>
+            </Button>
+          </Card>
+        </div>
       </div >
     )
   }

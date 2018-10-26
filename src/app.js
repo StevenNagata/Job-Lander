@@ -21,6 +21,7 @@ export default class App extends React.Component {
     }
     this.saveProspect = this.saveProspect.bind(this)
     this.saveUpdatedProspect = this.saveUpdatedProspect.bind(this)
+    this.deleteProspect = this.deleteProspect.bind(this)
   }
   componentDidMount() {
     fetch('/prospects/', get)
@@ -75,6 +76,19 @@ export default class App extends React.Component {
       })
       .catch(err => console.log(err))
   }
+  deleteProspect(id) {
+    fetch(`/prospects/${id}`, {
+      method: 'delete'
+    })
+      .then(resp => resp.json())
+      .then(() => {
+        const updated = this.state.prospects.filter(job => job.id !== parseInt(id, 10))
+        this.setState({ prospects: updated }, () => {
+          location.hash = '#view'
+        })
+      })
+      .catch(err => console.log(err))
+  }
   renderView() {
     const { path, params } = this.state.view
     switch (path) {
@@ -100,7 +114,7 @@ export default class App extends React.Component {
         }
         return (
           <div>
-            <EditJobForm editJob={editJob} saveUpdate={this.saveUpdatedProspect} />
+            <EditJobForm editJob={editJob} delete={this.deleteProspect} saveUpdate={this.saveUpdatedProspect} />
           </div>
         )
       default:

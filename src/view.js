@@ -6,10 +6,10 @@ import Typography from '@material-ui/core/Typography'
 
 const styles = {
   background: {
-    padding: '1%',
     position: 'absolute',
     width: '100vw',
-    backgroundColor: '#E8F1F3'
+    backgroundColor: '#E8F1F3',
+    paddingBottom: '5%'
   },
   grid: {
     marginTop: '2%'
@@ -44,7 +44,8 @@ const styles = {
     color: '#D3D3D3',
     display: 'block',
     maxWidth: '50rem',
-    margin: 'auto'
+    margin: 'auto',
+    padding: '0 1%'
   }
 }
 
