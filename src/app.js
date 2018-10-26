@@ -77,11 +77,10 @@ export default class App extends React.Component {
       .catch(err => console.log(err))
   }
   deleteProspect(id) {
-    console.log(this.state)
     fetch(`/prospects/${id}`, {
       method: 'delete'
     })
-      .then(resp => console.log(resp.json()))
+      .then(resp => resp.json())
       .then(() => {
         const updated = this.state.prospects.filter(job => job.id !== parseInt(id, 10))
         this.setState({ prospects: updated }, () => {

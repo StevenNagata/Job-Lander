@@ -128,7 +128,6 @@ export default class EditJobForm extends React.Component {
     this.setState({ open: false })
   }
   confirmDelete() {
-    console.log('ran delete')
     this.props.delete(this.props.editJob.id)
   }
   render() {

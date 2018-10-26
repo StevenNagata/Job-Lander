@@ -8,7 +8,8 @@ const styles = {
   background: {
     position: 'absolute',
     width: '100vw',
-    backgroundColor: '#E8F1F3'
+    backgroundColor: '#E8F1F3',
+    paddingBottom: '5%'
   },
   grid: {
     marginTop: '2%'

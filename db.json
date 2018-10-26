@@ -43,18 +43,18 @@
     {
       "id": 6,
       "company": "INK Agency",
-      "title": "Junior Developer 1",
+      "title": "Junior Developer 3",
       "description": "As a junior developer you will work with a team to help create the software and websites that enable brands to thrive. You will be exposed to new technologies and will help craft modern websites and to showcase how customers interact with the brands they care about.\n\nQualifications:\n\nA technical degree, certificate or equivalent experience\nExperience developing software and/or web applications\nExcellent verbal and written communication skills; ability to think outside the box and adapt to change",
       "details": "Required Technologies\n\nPHP\nHTML5\nCSS/SCSS\nJavaScript/ECMA Script\nAt least a basic understanding of SQL and Databases\nVersion control technology such as GIT\n\nNice to haves:\n\nExperience working with WordPress and/or Drupal\nExperience with ASP.NET\nExperience with Laravel and/or CodeIgniter\nExperience with Mobile Technologies such as Xamarin, Android, Kotlin and Swift\nExperience with Vagrant\nExperience with React.js, Vue.js or Angular.js\n\nPerks\n\nFlexible PTO\n401k program\nFull Medical",
       "status": "Phone Interviewing"
     },
     {
-      "company": "new",
-      "title": "ee",
-      "description": "",
-      "details": "",
+      "company": "example company",
+      "title": "example title",
+      "description": "example desc",
+      "details": "none",
       "status": "Phone Interviewing",
-      "id": 7
+      "id": 8
     }
   ]
 }
