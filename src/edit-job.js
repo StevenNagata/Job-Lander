@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import MenuItem from '@material-ui/core/MenuItem'
 import Card from '@material-ui/core/Paper'
+import Icon from '@material-ui/core/Icon'
 
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true
 
@@ -38,6 +39,14 @@ const styles = {
     position: 'absolute',
     width: '100vw',
     height: '100vh'
+  },
+  deleteButton: {
+    color: 'white',
+    backgroundColor: '#ed553b',
+    position: 'absolute',
+    top: '3%',
+    right: '3%',
+    zIndex: '3'
   },
   card: {
     position: 'relative',
@@ -100,6 +109,9 @@ export default class EditJobForm extends React.Component {
     return (
       <div style={styles.parentContainer}>
         <Card style={styles.card}>
+          <Button style={styles.deleteButton} variant="fab" aria-label="Edit">
+            <Icon>delete_icon</Icon>
+          </Button>
           <Grid
             container
             spacing={16}
