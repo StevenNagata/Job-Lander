@@ -6,6 +6,7 @@ import Navbar from './navbar'
 import hash from './hash'
 import Details from './details'
 import EditJobForm from './edit-job'
+import EventForm from './event-form'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -116,6 +117,11 @@ export default class App extends React.Component {
           <div>
             <EditJobForm editJob={editJob} delete={this.deleteProspect} saveUpdate={this.saveUpdatedProspect} />
           </div>
+        )
+      case 'newevent':
+        const jobId = parseInt(params.uniqueId, 10)
+        return (
+          <EventForm jobId={jobId}/>
         )
       default:
         return (
