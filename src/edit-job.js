@@ -43,8 +43,7 @@ const styles = {
     height: '100vh'
   },
   deleteButton: {
-    color: 'white',
-    backgroundColor: '#ed553b',
+    color: '#3B3B3B',
     position: 'absolute',
     top: '3%',
     right: '3%',
@@ -104,6 +103,7 @@ export default class EditJobForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
+    this.confirmDelete = this.confirmDelete.bind(this)
   }
   handleChange(event) {
     const status = event.target.value
@@ -127,10 +127,9 @@ export default class EditJobForm extends React.Component {
   handleClose() {
     this.setState({ open: false })
   }
-  componentDidUpdate(prevProps) {
-    if (this.props.editJob !== prevProps.editJob) {
-      this.setState({ status: this.props.editJob.status })
-    }
+  confirmDelete() {
+    console.log('ran delete')
+    this.props.delete(this.props.editJob.id)
   }
   render() {
     if (!this.props.editJob) {
@@ -140,9 +139,8 @@ export default class EditJobForm extends React.Component {
     return (
       <div style={styles.parentContainer}>
         <Card style={styles.card}>
-          <Button onClick={this.handleOpen} style={styles.deleteButton} variant="fab" aria-label="Edit">
-            <Icon>delete_icon</Icon>
-          </Button>
+          {/* <Button onClick={this.handleOpen} style={styles.deleteButton} variant="fab" aria-label="Edit"> */}
+          <Icon onClick={this.handleOpen} style={styles.deleteButton}>delete_icon</Icon>
           <Grid
             container
             spacing={16}
@@ -224,14 +222,13 @@ export default class EditJobForm extends React.Component {
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           open={this.state.open}
-          onClose={this.handleClose}
         >
           <div style={styles.modal}>
             <Typography variant="subtitle1" id="modal-title">
               Are you sure you want to delete this job prospect?
             </Typography>
             <Button style={styles.cancel} onClick={this.handleClose} aria-label="cancel">Cancel</Button>
-            <Button style={styles.confirmDelete} aria-label="delete">Delete</Button>
+            <Button onClick={this.confirmDelete} style={styles.confirmDelete} aria-label="delete">Delete</Button>
           </div>
         </Modal>
       </div>
