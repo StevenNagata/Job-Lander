@@ -63,6 +63,7 @@ class DayDatePicker extends PureComponent {
         <DatePicker
           keyboard
           required
+          id="date"
           margin="normal"
           format="MM/dd/yyyy"
           label="Event Date"
@@ -117,13 +118,27 @@ export default class EventForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      status: null
+      currentJobId: this.props.jobId
     }
+    this.saveEvent = this.saveEvent.bind(this)
+  }
+  saveEvent(event) {
+    event.preventDefault()
+    const newEvent = {
+      jobid: this.state.currentJobId,
+      title: event.target.eventtitle.value,
+      status: event.target.status.value,
+      date: event.target.date.value,
+      details: event.target.details.value,
+      nextstep: event.target.nextstep.value
+    }
+    console.log(newEvent)
   }
   render() {
     return (
       <div style={styles.container}>
-        <form>
+        <form
+          onSubmit={this.saveEvent}>
           <Grid container spacing={16}>
             <Grid item xs={12}>
               <Typography variant="h5" align="center">Create New Event</Typography>
