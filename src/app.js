@@ -141,6 +141,7 @@ export default class App extends React.Component {
   saveEditedEvent(updatedEvent) {
     const jsonEvent = JSON.stringify(updatedEvent)
     const eventId = parseInt(this.state.view.params.uniqueId, 10)
+    let jobId = ''
     console.log(jsonEvent)
     fetch(`/events/${eventId}`, {
       method: 'PATCH',
@@ -149,9 +150,25 @@ export default class App extends React.Component {
     })
       .then(resp => resp.json())
       .then(data => {
+        jobId = data.jobId
+        const updated = this.state.events.map(event => {
+          if (data.id === event.id) {
+            return data
+          }
+          else {
+            return event
+          }
+        })
+        return updated
+      })
+      .then(events => {
+        this.setState({ events }, () => {
+          location.hash = `#details?uniqueId=${jobId}`
+        })
       })
       .catch(err => console.log(err))
   }
+
   renderView() {
     const { path, params } = this.state.view
     switch (path) {
