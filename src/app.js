@@ -107,7 +107,9 @@ export default class App extends React.Component {
     })
       .then(resp => resp.json())
       .then(data => {
-        this.setState({ events: [...this.state.events, data] })
+        this.setState({ events: [...this.state.events, data] }, () => {
+          location.hash = `#details?uniqueId=${newEvent.jobid}`
+        })
       })
       .catch(err => console.log(err))
   }
