@@ -132,7 +132,7 @@ export default class EventForm extends React.Component {
       details: event.target.details.value,
       nextstep: event.target.nextstep.value
     }
-    console.log(newEvent)
+    this.props.saveAnEvent(newEvent)
   }
   render() {
     return (

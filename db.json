@@ -148,6 +148,24 @@
       "details": "3123123123",
       "nextstep": "123123123",
       "id": 11
+    },
+    {
+      "jobid": 6,
+      "title": "Applied for Job",
+      "status": "Applied/Waiting for Response",
+      "date": "10/29/2018",
+      "details": "- Sent in Resume and cover letter to HR.\n- Typical wait time is around 1 week.\n- Job description was heavily JavaScript!!\n",
+      "nextstep": "Wait to hear back!!!🙏",
+      "id": 12
+    },
+    {
+      "jobid": 6,
+      "title": "THE PHONE INTERVIEW!!🤘",
+      "status": "Phone Interviewing",
+      "date": "10/31/2018",
+      "details": "- Had a phone interview with Josh (HR) \n- Told him my strengths were: \n  - Self-driven\n  - Hard worker \n- Told him my weaknesses were: \n  - Sometimes I get caught up in development that I can start working on other features before fully closing out the initial feature I'm working on",
+      "nextstep": "Wait to hear back from Josh. The next step would be coming in to talk to the IT manager and maybe technical questions??!?!?!🤞",
+      "id": 13
     }
   ]
 }
