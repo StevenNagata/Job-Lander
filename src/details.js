@@ -61,13 +61,13 @@ const styles = {
     width: '90%',
     margin: '1% auto'
   },
-  containertimeline: {
+  containerTimeline: {
     padding: '0% 2%',
     maxWidth: '50rem',
     margin: '2% auto',
     align: 'center'
   },
-  timelinediv: {
+  timelineDiv: {
     position: 'block',
     maxWidth: '45rem',
     width: '95%',
@@ -76,14 +76,14 @@ const styles = {
   date: {
     fontSize: '0.6rem'
   },
-  timelinecard: {
+  timelineCard: {
     backgroundColor: '#E8F1F3'
   },
-  eventstatus: {
+  eventStatus: {
     fontSize: '0.5rem',
     color: '#7A7C7D'
   },
-  eventparagraph: {
+  eventParagraph: {
     color: '#07141C',
     margin: '1%',
     fontSize: '0.7rem',
@@ -139,24 +139,24 @@ export default class Details extends React.Component {
               {
                 this.props.events.map(event => {
                   return (
-                    <div style={styles.timelinediv} key={event.id}>
-                      <Card style={styles.timelinecard}>
-                        <Grid style={styles.containertimeline} container spacing={0}>
+                    <div style={styles.timelineDiv} key={event.id}>
+                      <Card style={styles.timelineCard}>
+                        <Grid style={styles.containerTimeline} container spacing={0}>
                           <Grid item xs={12}>
                             <Grid item xs={12}>
                               <Typography variant="body1" align="center">{event.title}</Typography>
                             </Grid>
                             <Grid item xs={12}>
-                              <Typography style={styles.eventstatus} align="center" variant="overline">{event.status}</Typography>
+                              <Typography style={styles.eventStatus} align="center" variant="overline">{event.status}</Typography>
                               <Typography style={styles.date} variant="body2">Date: {event.date}</Typography>
                             </Grid>
                             <Grid item xs={12}>
                               <Typography>Details:</Typography>
-                              <Typography style={styles.eventparagraph} variant="body2">{event.details}</Typography>
+                              <Typography style={styles.eventParagraph} variant="body2">{event.details}</Typography>
                             </Grid>
                             <Grid item xs={12}>
                               <Typography>Next Steps:</Typography>
-                              <Typography style={styles.eventparagraph} variant="body2">{event.nextStep}</Typography>
+                              <Typography style={styles.eventParagraph} variant="body2">{event.nextStep}</Typography>
                             </Grid>
                           </Grid>
                         </Grid>
