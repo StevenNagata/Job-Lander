@@ -101,7 +101,6 @@ export default class App extends React.Component {
   saveAnEvent(newEvent) {
     const job = this.state.prospects.find(job => job.id === newEvent.jobid)
     job.status = newEvent.status
-    console.log(job)
     const jsonProspect = JSON.stringify(job)
     const jsonEvent = JSON.stringify(newEvent)
     fetch('/events/', {
