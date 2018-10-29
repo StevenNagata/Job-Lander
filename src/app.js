@@ -176,6 +176,10 @@ export default class App extends React.Component {
         return (
           <EventForm jobId={jobId} saveAnEvent={this.saveAnEvent} />
         )
+      case 'editEvent':
+        return (
+          <EventForm />
+        )
       default:
         return (
           <div>
