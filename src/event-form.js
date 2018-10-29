@@ -126,13 +126,14 @@ export default class EventForm extends React.Component {
   saveEvent(event) {
     event.preventDefault()
     const newEvent = {
-      jobid: this.state.currentJobId,
+      jobId: this.state.currentJobId,
       title: event.target.eventtitle.value,
       status: event.target.status.value,
       date: event.target.date.value,
       details: event.target.details.value,
-      nextstep: event.target.nextstep.value
+      nextStep: event.target.nextstep.value
     }
+    console.log(newEvent)
     this.props.saveAnEvent(newEvent)
   }
   render() {

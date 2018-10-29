@@ -45,7 +45,7 @@
       "title": "example title",
       "description": "example desc",
       "details": "none",
-      "status": "Phone Interviewing",
+      "status": "Interviewing",
       "id": 8
     }
   ],
@@ -69,12 +69,12 @@
       "id": 2
     },
     {
-      "jobid": 6,
+      "jobId": 6,
       "title": "GOT THE JOB",
       "status": "Offered",
       "date": "10/31/2018",
       "details": "YAHZ!",
-      "nextstep": "Start Nov 17th",
+      "nextStep": "Start Nov 17th",
       "id": 3
     }
   ]

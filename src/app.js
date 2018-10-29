@@ -99,7 +99,7 @@ export default class App extends React.Component {
       .catch(err => console.log(err))
   }
   saveAnEvent(newEvent) {
-    const job = this.state.prospects.find(job => job.id === newEvent.jobid)
+    const job = this.state.prospects.find(job => job.id === parseInt(newEvent.jobId, 10))
     job.status = newEvent.status
     const jsonProspect = JSON.stringify(job)
     const jsonEvent = JSON.stringify(newEvent)
@@ -111,11 +111,11 @@ export default class App extends React.Component {
       .then(resp => resp.json())
       .then(data => {
         this.setState({ events: [...this.state.events, data] }, () => {
-          location.hash = `#details?uniqueId=${newEvent.jobid}`
+          location.hash = `#details?uniqueId=${newEvent.jobId}`
         })
       })
       .catch(err => console.log(err))
-    fetch(`/prospects/${newEvent.jobid}`, {
+    fetch(`/prospects/${newEvent.jobId}`, {
       method: 'put',
       headers: { 'content-type': 'application/json' },
       body: jsonProspect
@@ -149,7 +149,7 @@ export default class App extends React.Component {
         )
       case 'details':
         const job = this.state.prospects.find(job => job.id === parseInt(params.uniqueId, 10))
-        const events = this.state.events.filter(event => event.jobid === parseInt(params.uniqueId, 10))
+        const events = this.state.events.filter(event => event.jobId === parseInt(params.uniqueId, 10))
         events.sort(function (a, b) {
           let dateA = new Date(a.date)
           let dateB = new Date(b.date)

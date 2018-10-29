@@ -156,7 +156,7 @@ export default class Details extends React.Component {
                             </Grid>
                             <Grid item xs={12}>
                               <Typography>Next Steps:</Typography>
-                              <Typography style={styles.eventparagraph} variant="body2">{event.nextstep}</Typography>
+                              <Typography style={styles.eventparagraph} variant="body2">{event.nextStep}</Typography>
                             </Grid>
                           </Grid>
                         </Grid>
