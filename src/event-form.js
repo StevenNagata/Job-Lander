@@ -33,6 +33,7 @@ const options = [
 const styles = {
   container: {
     width: '95%',
+    maxWidth: '50rem',
     margin: '5% auto'
   },
   savegrid: {
