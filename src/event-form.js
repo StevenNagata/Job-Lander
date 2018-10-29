@@ -120,9 +120,11 @@ export default class EventForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentJobId: this.props.jobId
+      currentJobId: this.props.jobId,
+      editedEvent: this.props.editedEvent
     }
     this.saveEvent = this.saveEvent.bind(this)
+    this.saveEdited = this.saveEdited.bind(this)
   }
   saveEvent(event) {
     event.preventDefault()
@@ -136,24 +138,35 @@ export default class EventForm extends React.Component {
     }
     this.props.saveAnEvent(newEvent)
   }
+  saveEdited(event) {
+    event.preventDefault()
+    console.log(location.hash)
+    const editedEvent = {
+      title: event.target.eventtitle.value,
+      status: event.target.status.value,
+      date: event.target.date.value,
+      details: event.target.details.value,
+      nextStep: event.target.nextstep.value
+    }
+    this.props.saveEditedEvent(editedEvent)
+  }
   render() {
     if (this.props.isEdit) {
       if (!this.props.editedEvent) {
         return null
       }
     }
-    console.log(this.props)
+    const save = this.props.isEdit ? this.saveEdited : this.saveEvent
     const header = this.props.isEdit ? 'Edit Event' : 'Create New Event'
     const editTitle = this.props.isEdit ? this.props.editedEvent.title : ''
     const editDate = this.props.isEdit ? this.props.editedEvent.date : new Date()
     const editStatus = this.props.isEdit ? this.props.editedEvent.status : 'Interested'
     const editDetails = this.props.isEdit ? this.props.editedEvent.details : ''
     const editNextStep = this.props.isEdit ? this.props.editedEvent.nextStep : ''
-
     return (
       <div style={styles.container}>
         <form
-          onSubmit={this.saveEvent}>
+          onSubmit={save}>
           <Grid container spacing={16}>
             <Grid item xs={12}>
               <Typography variant="h5" align="center">{header}</Typography>

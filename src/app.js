@@ -25,6 +25,7 @@ export default class App extends React.Component {
     this.saveUpdatedProspect = this.saveUpdatedProspect.bind(this)
     this.deleteProspect = this.deleteProspect.bind(this)
     this.saveAnEvent = this.saveAnEvent.bind(this)
+    this.saveEditedEvent = this.saveEditedEvent.bind(this)
   }
   componentDidMount() {
     fetch('/prospects/', get)
@@ -137,6 +138,20 @@ export default class App extends React.Component {
       })
       .catch(err => console.log(err))
   }
+  saveEditedEvent(updatedEvent) {
+    const jsonEvent = JSON.stringify(updatedEvent)
+    const eventId = parseInt(this.state.view.params.uniqueId, 10)
+    console.log(jsonEvent)
+    fetch(`/events/${eventId}`, {
+      method: 'PATCH',
+      headers: { 'content-type': 'application/json' },
+      body: jsonEvent
+    })
+      .then(resp => resp.json())
+      .then(data => {
+      })
+      .catch(err => console.log(err))
+  }
   renderView() {
     const { path, params } = this.state.view
     switch (path) {
@@ -180,7 +195,7 @@ export default class App extends React.Component {
         const eventId = parseInt(params.uniqueId, 10)
         const currentEditedEvent = this.state.events.find(event => event.id === eventId)
         return (
-          <EventForm editedEvent={currentEditedEvent} isEdit />
+          <EventForm editedEvent={currentEditedEvent} isEdit saveEditedEvent={this.saveEditedEvent} />
         )
       default:
         return (
