@@ -77,6 +77,7 @@ const styles = {
     fontSize: '0.6rem'
   },
   timelineCard: {
+    position: 'relative',
     backgroundColor: '#E8F1F3'
   },
   eventStatus: {
@@ -88,6 +89,12 @@ const styles = {
     margin: '1%',
     fontSize: '0.7rem',
     whiteSpace: 'pre-wrap'
+  },
+  editEvent: {
+    position: 'absolute',
+    right: '5px',
+    bottom: '5px',
+    color: '#3B3B3B'
   }
 }
 
@@ -141,6 +148,7 @@ export default class Details extends React.Component {
                   return (
                     <div style={styles.timelineDiv} key={event.id}>
                       <Card style={styles.timelineCard}>
+                        <Icon style={styles.editEvent}>edit_icon</Icon>
                         <Grid style={styles.containerTimeline} container spacing={0}>
                           <Grid item xs={12}>
                             <Grid item xs={12}>
