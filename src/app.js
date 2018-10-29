@@ -24,6 +24,7 @@ export default class App extends React.Component {
     this.saveProspect = this.saveProspect.bind(this)
     this.saveUpdatedProspect = this.saveUpdatedProspect.bind(this)
     this.deleteProspect = this.deleteProspect.bind(this)
+    this.saveAnEvent = this.saveAnEvent.bind(this)
   }
   componentDidMount() {
     fetch('/prospects/', get)
@@ -97,6 +98,19 @@ export default class App extends React.Component {
       })
       .catch(err => console.log(err))
   }
+  saveAnEvent(newEvent) {
+    const jsonEvent = JSON.stringify(newEvent)
+    fetch('/events/', {
+      method: 'post',
+      headers: { 'content-type': 'application/json' },
+      body: jsonEvent
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({ events: [...this.state.events, data] })
+      })
+      .catch(err => console.log(err))
+  }
   renderView() {
     const { path, params } = this.state.view
     switch (path) {
@@ -109,10 +123,11 @@ export default class App extends React.Component {
         )
       case 'details':
         const job = this.state.prospects.find(job => job.id === parseInt(params.uniqueId, 10))
+        const events = this.state.events.filter(event => event.jobid === parseInt(params.uniqueId, 10))
         return (
           <div>
             <Navbar />
-            <Details job={job} editProspect={this.editProspect} />
+            <Details job={job} events={events} editProspect={this.editProspect} />
           </div>
         )
       case 'edit':
@@ -128,7 +143,7 @@ export default class App extends React.Component {
       case 'newevent':
         const jobId = parseInt(params.uniqueId, 10)
         return (
-          <EventForm jobId={jobId} />
+          <EventForm jobId={jobId} saveAnEvent={this.saveAnEvent} />
         )
       default:
         return (
