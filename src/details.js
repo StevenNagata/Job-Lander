@@ -48,6 +48,46 @@ const styles = {
   },
   center: {
     margin: '2%'
+  },
+  addEventGrid: {
+    padding: '2%',
+    textAlign: 'center'
+  },
+  addEvent: {
+    color: '#3B3B3B',
+    backgroundColor: '#4fb99f'
+  },
+  timeline: {
+    width: '90%',
+    margin: '1% auto'
+  },
+  containerTimeline: {
+    padding: '0% 2%',
+    maxWidth: '50rem',
+    margin: '2% auto',
+    align: 'center'
+  },
+  timelineDiv: {
+    position: 'block',
+    maxWidth: '45rem',
+    width: '95%',
+    margin: '2% auto'
+  },
+  date: {
+    fontSize: '0.6rem'
+  },
+  timelineCard: {
+    backgroundColor: '#E8F1F3'
+  },
+  eventStatus: {
+    fontSize: '0.5rem',
+    color: '#7A7C7D'
+  },
+  eventParagraph: {
+    color: '#07141C',
+    margin: '1%',
+    fontSize: '0.7rem',
+    whiteSpace: 'pre-wrap'
   }
 }
 
@@ -91,6 +131,42 @@ export default class Details extends React.Component {
               </Grid>
               <Grid item xs={12}>
                 <Typography style={styles.paragraph}>{details}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body2"><strong>Timeline:</strong></Typography>
+              </Grid>
+
+              {
+                this.props.events.map(event => {
+                  return (
+                    <div style={styles.timelineDiv} key={event.id}>
+                      <Card style={styles.timelineCard}>
+                        <Grid style={styles.containerTimeline} container spacing={0}>
+                          <Grid item xs={12}>
+                            <Grid item xs={12}>
+                              <Typography variant="body1" align="center">{event.title}</Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                              <Typography style={styles.eventStatus} align="center" variant="overline">{event.status}</Typography>
+                              <Typography style={styles.date} variant="body2">Date: {event.date}</Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                              <Typography>Details:</Typography>
+                              <Typography style={styles.eventParagraph} variant="body2">{event.details}</Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                              <Typography>Next Steps:</Typography>
+                              <Typography style={styles.eventParagraph} variant="body2">{event.nextStep}</Typography>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Card>
+                    </div>
+                  )
+                })
+              }
+              <Grid style={styles.addEventGrid} item xs={12}>
+                <Button style={styles.addEvent} href={`#newevent?uniqueId=${this.props.job.id}`}>Add Event</Button>
               </Grid>
             </Grid>
             <Button id="editButton" href={`#edit?uniqueId=${id}`} variant="fab" aria-label="Edit">
