@@ -50,7 +50,7 @@ class DayDatePicker extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      selectedDate: new Date()
+      selectedDate: this.props.defaultValue
     }
     this.handleDateChange = this.handleDateChange.bind(this)
   }
@@ -82,7 +82,7 @@ class Status extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      status: false
+      status: this.props.defaultValue
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -94,6 +94,7 @@ class Status extends React.Component {
     return (
       <TextField
         select
+        required
         fullWidth
         id="status"
         label="Current Status"
@@ -133,32 +134,45 @@ export default class EventForm extends React.Component {
       details: event.target.details.value,
       nextStep: event.target.nextstep.value
     }
-    console.log(newEvent)
     this.props.saveAnEvent(newEvent)
   }
   render() {
+    if (this.props.isEdit) {
+      if (!this.props.editedEvent) {
+        return null
+      }
+    }
+    console.log(this.props)
+    const header = this.props.isEdit ? 'Edit Event' : 'Create New Event'
+    const editTitle = this.props.isEdit ? this.props.editedEvent.title : ''
+    const editDate = this.props.isEdit ? this.props.editedEvent.date : new Date()
+    const editStatus = this.props.isEdit ? this.props.editedEvent.status : 'Interested'
+    const editDetails = this.props.isEdit ? this.props.editedEvent.details : ''
+    const editNextStep = this.props.isEdit ? this.props.editedEvent.nextStep : ''
+
     return (
       <div style={styles.container}>
         <form
           onSubmit={this.saveEvent}>
           <Grid container spacing={16}>
             <Grid item xs={12}>
-              <Typography variant="h5" align="center">Create New Event</Typography>
+              <Typography variant="h5" align="center">{header}</Typography>
             </Grid>
             <Grid item xs={12}>
               <TextField
                 required
                 fullWidth
+                defaultValue={editTitle}
                 id="eventtitle"
                 label="Event Title"
                 margin="normal"
               />
             </Grid>
             <Grid item xs={6}>
-              <Status />
+              <Status defaultValue={editStatus} />
             </Grid>
             <Grid item xs={6}>
-              <DayDatePicker />
+              <DayDatePicker defaultValue={editDate} />
             </Grid>
             <Grid item xs={12}>
               <Typography>Details:</Typography>
@@ -166,6 +180,7 @@ export default class EventForm extends React.Component {
                 id="details"
                 fullWidth
                 multiline
+                defaultValue={editDetails}
                 rows="5"
                 margin="normal"
               />
@@ -174,6 +189,7 @@ export default class EventForm extends React.Component {
                 id="nextstep"
                 fullWidth
                 multiline
+                defaultValue={editNextStep}
                 rows="5"
                 margin="normal"
               />

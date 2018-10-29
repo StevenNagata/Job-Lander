@@ -148,7 +148,9 @@ export default class Details extends React.Component {
                   return (
                     <div style={styles.timelineDiv} key={event.id}>
                       <Card style={styles.timelineCard}>
-                        <Icon style={styles.editEvent} href={`#editEvent?uniqueId=${id}`}>edit_icon</Icon>
+                        <Button style={styles.editEvent} href={`#editEvent?uniqueId=${event.id}`} >
+                          <Icon>edit_icon</Icon>
+                        </Button>
                         <Grid style={styles.containerTimeline} container spacing={0}>
                           <Grid item xs={12}>
                             <Grid item xs={12}>

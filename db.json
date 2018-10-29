@@ -45,7 +45,7 @@
       "title": "example title",
       "description": "example desc",
       "details": "none",
-      "status": "Applied/Waiting for Response",
+      "status": "",
       "id": 8
     }
   ],
@@ -103,6 +103,33 @@
       "details": "33",
       "nextStep": "333",
       "id": 6
+    },
+    {
+      "jobId": 8,
+      "title": "444444",
+      "status": "Applied/Waiting for Response",
+      "date": "10/30/2018",
+      "details": "44444",
+      "nextStep": "44444",
+      "id": 7
+    },
+    {
+      "jobId": 8,
+      "title": "www",
+      "status": "",
+      "date": "10/29/2018",
+      "details": "wwww",
+      "nextStep": "ww",
+      "id": 8
+    },
+    {
+      "jobId": 8,
+      "title": "wwww",
+      "status": "",
+      "date": "10/29/2018",
+      "details": "www",
+      "nextStep": "ww",
+      "id": 9
     }
   ]
 }
