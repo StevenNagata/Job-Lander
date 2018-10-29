@@ -99,6 +99,10 @@ export default class App extends React.Component {
       .catch(err => console.log(err))
   }
   saveAnEvent(newEvent) {
+    const job = this.state.prospects.find(job => job.id === newEvent.jobid)
+    job.status = newEvent.status
+    console.log(job)
+    const jsonProspect = JSON.stringify(job)
     const jsonEvent = JSON.stringify(newEvent)
     fetch('/events/', {
       method: 'post',
@@ -110,6 +114,27 @@ export default class App extends React.Component {
         this.setState({ events: [...this.state.events, data] }, () => {
           location.hash = `#details?uniqueId=${newEvent.jobid}`
         })
+      })
+      .catch(err => console.log(err))
+    fetch(`/prospects/${newEvent.jobid}`, {
+      method: 'put',
+      headers: { 'content-type': 'application/json' },
+      body: jsonProspect
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        const updated = this.state.prospects.map(job => {
+          if (data.id === job.id) {
+            return data
+          }
+          else {
+            return job
+          }
+        })
+        return updated
+      })
+      .then(prospects => {
+        this.setState({ prospects })
       })
       .catch(err => console.log(err))
   }
