@@ -56,6 +56,29 @@ const styles = {
   addEvent: {
     color: '#3B3B3B',
     backgroundColor: '#4fb99f'
+  },
+  timeline: {
+    width: '90%',
+    margin: '1% auto'
+  },
+  containertimeline: {
+    padding: '2%',
+    maxWidth: '50rem',
+    margin: '2% auto',
+    align: 'center'
+  },
+  timelinediv: {
+    position: 'block',
+    maxWidth: '35rem',
+    width: '95%',
+    margin: '2% auto'
+  },
+  date: {
+    margin: '50% auto',
+    fontSize: '0.6rem'
+  },
+  timelinecard: {
+    backgroundColor: '#E8F1F3'
   }
 }
 
@@ -103,6 +126,36 @@ export default class Details extends React.Component {
               <Grid item xs={12}>
                 <Typography variant="body2"><strong>Timeline:</strong></Typography>
               </Grid>
+
+              {
+                this.props.events.map(event => {
+                  return (
+                    <div style={styles.timelinediv} key={event.id}>
+                      <Card style={styles.timelinecard}>
+                        <Grid style={styles.containertimeline} container spacing={0}>
+                          <Grid item xs={3}>
+                            <Typography style={styles.date} variant="body2">{event.date}</Typography>
+                          </Grid>
+                          <Grid item xs={9}>
+                            <Grid item xs={12}>
+                              <Typography variant="body1">{event.title}</Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                              <Typography variant="overline">{event.status}</Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                              <Typography variant="body2">{event.details}</Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                              <Typography variant="body2">{event.nextstep}</Typography>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Card>
+                    </div>
+                  )
+                })
+              }
               <Grid style={styles.addEventGrid} item xs={12}>
                 <Button style={styles.addEvent} href={`#newevent?uniqueId=${this.props.job.id}`}>Add Event</Button>
               </Grid>
