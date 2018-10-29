@@ -124,6 +124,11 @@ export default class App extends React.Component {
       case 'details':
         const job = this.state.prospects.find(job => job.id === parseInt(params.uniqueId, 10))
         const events = this.state.events.filter(event => event.jobid === parseInt(params.uniqueId, 10))
+        events.sort(function (a, b) {
+          let dateA = new Date(a.date)
+          let dateB = new Date(b.date)
+          return dateA - dateB
+        })
         return (
           <div>
             <Navbar />
