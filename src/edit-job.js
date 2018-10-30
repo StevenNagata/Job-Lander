@@ -120,7 +120,6 @@ export default class EditJobForm extends React.Component {
   }
   handleChange(event) {
     const status = event.target.value
-    console.log(status)
     this.setState({ status })
   }
   handleSubmit(event) {
