@@ -105,9 +105,6 @@ const styles = {
     color: '#3B3B3B',
     padding: '0'
   },
-  eventButton: {
-    width: '4rem'
-  },
   modal: {
     position: 'relative',
     top: '10rem',
@@ -226,7 +223,7 @@ export default class Details extends React.Component {
                             </Grid>
                           </Grid>
                         </Grid>
-                        <FadeMenu style={styles.menu} event={event} handleOpen={this.handleOpen} confirmDelete={this.confirmDelete}/>
+                        <FadeMenu style={styles.menu} event={event} handleOpen={this.handleOpen} confirmDelete={this.confirmDelete} />
                       </Card>
                     </div>
                   )
@@ -269,10 +266,10 @@ class FadeMenu extends React.Component {
     location.hash = `#editEvent?uniqueId=${this.props.event.id}`
   }
   openModal() {
-    this.setState({open: true})
+    this.setState({ open: true })
   }
   closeModal() {
-    this.setState({open: false})
+    this.setState({ open: false })
   }
   render() {
     const { anchorEl } = this.state
