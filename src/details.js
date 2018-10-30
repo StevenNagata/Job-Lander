@@ -4,6 +4,13 @@ import Card from '@material-ui/core/Card'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon'
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
+
+import Menu from '@material-ui/core/Menu'
+
+import Fade from '@material-ui/core/Fade'
+
+import MenuItem from '@material-ui/core/MenuItem'
 
 const styles = {
   parentContainer: {
@@ -90,11 +97,15 @@ const styles = {
     fontSize: '0.7rem',
     whiteSpace: 'pre-wrap'
   },
+  eventTitle: {
+    margin: '0 10%'
+  },
   editEvent: {
     position: 'absolute',
-    right: '5px',
-    bottom: '5px',
-    color: '#3B3B3B'
+    right: '0',
+    bottom: '0',
+    color: '#3B3B3B',
+    padding: '0'
   }
 }
 
@@ -169,13 +180,10 @@ export default class Details extends React.Component {
                   return (
                     <div style={styles.timelineDiv} key={event.id}>
                       <Card style={styles.timelineCard}>
-                        <Button style={styles.editEvent} href={`#editEvent?uniqueId=${event.id}`} >
-                          <Icon>edit_icon</Icon>
-                        </Button>
                         <Grid style={styles.containerTimeline} container spacing={0}>
                           <Grid item xs={12}>
                             <Grid item xs={12}>
-                              <Typography variant="body1" align="center">{event.title}</Typography>
+                              <Typography variant="body1" style={styles.eventTitle} align="center">{event.title}</Typography>
                             </Grid>
                             <Grid item xs={12}>
                               <Typography style={styles.eventStatus} align="center" variant="overline">{event.status}</Typography>
@@ -191,6 +199,7 @@ export default class Details extends React.Component {
                             </Grid>
                           </Grid>
                         </Grid>
+                        <FadeMenu style={styles.menu} event={event} />
                       </Card>
                     </div>
                   )
@@ -206,6 +215,51 @@ export default class Details extends React.Component {
           </Card>
         </div>
       </div >
+    )
+  }
+}
+
+class FadeMenu extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      anchorEl: null
+    }
+    this.handleClick = this.handleClick.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+  }
+  handleClick(event) {
+    this.setState({ anchorEl: event.currentTarget })
+  }
+
+  handleClose() {
+    this.setState({ anchorEl: null })
+  };
+
+  render() {
+    const { anchorEl } = this.state
+    const open = Boolean(anchorEl)
+
+    return (
+      <div style={styles.editEvent}>
+        <Button
+          aria-owns={open ? 'fade-menu' : null}
+          aria-haspopup="true"
+          onClick={this.handleClick}
+        >
+          <MoreHorizIcon />
+        </Button>
+        <Menu
+          id="fade-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={this.handleClose}
+          TransitionComponent={Fade}
+        >
+          <MenuItem ><Button href={`#editEvent?uniqueId=${this.props.event.id}`}>Edit</Button></MenuItem>
+          <MenuItem onClick={this.handleClose}>Delete</MenuItem>
+        </Menu>
+      </div>
     )
   }
 }
