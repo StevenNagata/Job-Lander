@@ -50,7 +50,7 @@ class DayDatePicker extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      selectedDate: new Date()
+      selectedDate: this.props.defaultValue
     }
     this.handleDateChange = this.handleDateChange.bind(this)
   }
@@ -82,7 +82,7 @@ class Status extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      status: false
+      status: this.props.defaultValue
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -94,6 +94,7 @@ class Status extends React.Component {
     return (
       <TextField
         select
+        required
         fullWidth
         id="status"
         label="Current Status"
@@ -119,9 +120,24 @@ export default class EventForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentJobId: this.props.jobId
+      event: null,
+      currentJobId: this.props.jobId,
+      editedEvent: this.props.editedEvent
     }
     this.saveEvent = this.saveEvent.bind(this)
+    this.saveEdited = this.saveEdited.bind(this)
+  }
+  componentDidMount() {
+    if (this.props.isEdit) {
+      fetch(`/events/${this.props.eventId}`)
+        .then(resp => resp.json())
+        .then(data => {
+          this.setState({
+            event: data
+          })
+        })
+        .catch(err => console.log(err))
+    }
   }
   saveEvent(event) {
     event.preventDefault()
@@ -133,32 +149,62 @@ export default class EventForm extends React.Component {
       details: event.target.details.value,
       nextStep: event.target.nextstep.value
     }
-    console.log(newEvent)
     this.props.saveAnEvent(newEvent)
   }
+  saveEdited(event) {
+    event.preventDefault()
+    const editedEvent = {
+      title: event.target.eventtitle.value,
+      status: event.target.status.value,
+      date: event.target.date.value,
+      details: event.target.details.value,
+      nextStep: event.target.nextstep.value
+    }
+    this.props.saveEditedEvent(editedEvent)
+  }
   render() {
+    if (this.props.isEdit && !this.state.event) {
+      return null
+    }
+    let save = this.saveEvent
+    let header = 'Create New Event'
+    let editTitle = ''
+    let editDate = new Date()
+    let editStatus = 'Interested'
+    let editDetails = ''
+    let editNextStep = ''
+    if (this.state.event) {
+      save = this.saveEdited
+      header = 'Edit Event'
+      editTitle = this.state.event.title
+      editDate = this.state.event.date
+      editStatus = this.state.event.status
+      editDetails = this.state.event.details
+      editNextStep = this.state.event.nextStep
+    }
     return (
       <div style={styles.container}>
         <form
-          onSubmit={this.saveEvent}>
+          onSubmit={save}>
           <Grid container spacing={16}>
             <Grid item xs={12}>
-              <Typography variant="h5" align="center">Create New Event</Typography>
+              <Typography variant="h5" align="center">{header}</Typography>
             </Grid>
             <Grid item xs={12}>
               <TextField
                 required
                 fullWidth
+                defaultValue={editTitle}
                 id="eventtitle"
                 label="Event Title"
                 margin="normal"
               />
             </Grid>
             <Grid item xs={6}>
-              <Status />
+              <Status defaultValue={editStatus} />
             </Grid>
             <Grid item xs={6}>
-              <DayDatePicker />
+              <DayDatePicker defaultValue={editDate} />
             </Grid>
             <Grid item xs={12}>
               <Typography>Details:</Typography>
@@ -166,6 +212,7 @@ export default class EventForm extends React.Component {
                 id="details"
                 fullWidth
                 multiline
+                defaultValue={editDetails}
                 rows="5"
                 margin="normal"
               />
@@ -174,6 +221,7 @@ export default class EventForm extends React.Component {
                 id="nextstep"
                 fullWidth
                 multiline
+                defaultValue={editNextStep}
                 rows="5"
                 margin="normal"
               />

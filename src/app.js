@@ -1,5 +1,4 @@
 import React from 'react'
-import { get } from 'http'
 import JobForm from './job-form'
 import ViewProspects from './view'
 import Navbar from './navbar'
@@ -25,15 +24,16 @@ export default class App extends React.Component {
     this.saveUpdatedProspect = this.saveUpdatedProspect.bind(this)
     this.deleteProspect = this.deleteProspect.bind(this)
     this.saveAnEvent = this.saveAnEvent.bind(this)
+    this.saveEditedEvent = this.saveEditedEvent.bind(this)
   }
   componentDidMount() {
-    fetch('/prospects/', get)
+    fetch('/prospects/')
       .then(resp => resp.json())
       .then(data => {
         this.setState({ prospects: data })
       })
       .catch(err => console.log(err))
-    fetch('/events/', get)
+    fetch('/events/')
       .then(resp => resp.json())
       .then(data => {
         this.setState({ events: data })
@@ -137,6 +137,36 @@ export default class App extends React.Component {
       })
       .catch(err => console.log(err))
   }
+  saveEditedEvent(updatedEvent) {
+    const jsonEvent = JSON.stringify(updatedEvent)
+    const eventId = parseInt(this.state.view.params.uniqueId, 10)
+    let jobId = ''
+    fetch(`/events/${eventId}`, {
+      method: 'PATCH',
+      headers: { 'content-type': 'application/json' },
+      body: jsonEvent
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        jobId = data.jobId
+        const updated = this.state.events.map(event => {
+          if (data.id === event.id) {
+            return data
+          }
+          else {
+            return event
+          }
+        })
+        return updated
+      })
+      .then(events => {
+        this.setState({ events }, () => {
+          location.hash = `#details?uniqueId=${jobId}`
+        })
+      })
+      .catch(err => console.log(err))
+  }
+
   renderView() {
     const { path, params } = this.state.view
     switch (path) {
@@ -148,33 +178,26 @@ export default class App extends React.Component {
           </div>
         )
       case 'details':
-        const job = this.state.prospects.find(job => job.id === parseInt(params.uniqueId, 10))
-        const events = this.state.events.filter(event => event.jobId === parseInt(params.uniqueId, 10))
-        events.sort(function (a, b) {
-          let dateA = new Date(a.date)
-          let dateB = new Date(b.date)
-          return dateA - dateB
-        })
         return (
           <div>
             <Navbar />
-            <Details job={job} events={events} editProspect={this.editProspect} />
+            <Details jobId={parseInt(params.uniqueId, 10)} editProspect={this.editProspect} />
           </div>
         )
       case 'edit':
-        const editJob = this.state.prospects.find(job => job.id === parseInt(params.uniqueId, 10))
-        if (!editJob) {
-          return null
-        }
         return (
           <div>
-            <EditJobForm editJob={editJob} delete={this.deleteProspect} saveUpdate={this.saveUpdatedProspect} />
+            <EditJobForm jobId={parseInt(params.uniqueId, 10)} delete={this.deleteProspect} saveUpdate={this.saveUpdatedProspect} />
           </div>
         )
       case 'newevent':
         const jobId = parseInt(params.uniqueId, 10)
         return (
           <EventForm jobId={jobId} saveAnEvent={this.saveAnEvent} />
+        )
+      case 'editEvent':
+        return (
+          <EventForm eventId={parseInt(params.uniqueId, 10)} isEdit saveEditedEvent={this.saveEditedEvent} />
         )
       default:
         return (

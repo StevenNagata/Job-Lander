@@ -96,7 +96,8 @@ export default class EditJobForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      status: this.props.editJob.status,
+      job: null,
+      status: null,
       open: false
     }
     this.handleChange = this.handleChange.bind(this)
@@ -105,6 +106,17 @@ export default class EditJobForm extends React.Component {
     this.handleClose = this.handleClose.bind(this)
     this.confirmDelete = this.confirmDelete.bind(this)
   }
+  componentDidMount() {
+    fetch(`/prospects/${this.props.jobId}`)
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({
+          job: data,
+          status: data.status
+        })
+      })
+      .catch(err => console.log(err))
+  }
   handleChange(event) {
     const status = event.target.value
     this.setState({ status })
@@ -112,7 +124,7 @@ export default class EditJobForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     const updatedProspect = {
-      id: this.props.editJob.id,
+      id: this.state.job.id,
       company: event.target.company.value,
       title: event.target.title.value,
       description: event.target.description.value,
@@ -131,10 +143,10 @@ export default class EditJobForm extends React.Component {
     this.props.delete(this.props.editJob.id)
   }
   render() {
-    if (!this.props.editJob) {
+    if (!this.state.job) {
       return null
     }
-    const { title, company, description, details } = this.props.editJob
+    const { title, company, description, details } = this.state.job
     return (
       <div style={styles.parentContainer}>
         <Card style={styles.card}>
