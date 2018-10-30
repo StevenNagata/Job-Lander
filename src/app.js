@@ -187,13 +187,9 @@ export default class App extends React.Component {
           </div>
         )
       case 'edit':
-        const editJob = this.state.prospects.find(job => job.id === parseInt(params.uniqueId, 10))
-        if (!editJob) {
-          return null
-        }
         return (
           <div>
-            <EditJobForm editJob={editJob} delete={this.deleteProspect} saveUpdate={this.saveUpdatedProspect} />
+            <EditJobForm jobId={parseInt(params.uniqueId, 10)} delete={this.deleteProspect} saveUpdate={this.saveUpdatedProspect} />
           </div>
         )
       case 'newevent':
