@@ -1,5 +1,4 @@
 import React from 'react'
-import { get } from 'http'
 import JobForm from './job-form'
 import ViewProspects from './view'
 import Navbar from './navbar'
@@ -28,13 +27,13 @@ export default class App extends React.Component {
     this.saveEditedEvent = this.saveEditedEvent.bind(this)
   }
   componentDidMount() {
-    fetch('/prospects/', get)
+    fetch('/prospects/')
       .then(resp => resp.json())
       .then(data => {
         this.setState({ prospects: data })
       })
       .catch(err => console.log(err))
-    fetch('/events/', get)
+    fetch('/events/')
       .then(resp => resp.json())
       .then(data => {
         this.setState({ events: data })

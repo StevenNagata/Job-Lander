@@ -6,7 +6,6 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import MenuItem from '@material-ui/core/MenuItem'
 import { DatePicker } from 'material-ui-pickers'
 import Button from '@material-ui/core/Button'
-import { get } from 'http'
 
 const options = [
   {
@@ -130,7 +129,7 @@ export default class EventForm extends React.Component {
   }
   componentDidMount() {
     if (this.props.isEdit) {
-      fetch(`/events/${this.props.eventId}`, get)
+      fetch(`/events/${this.props.eventId}`)
         .then(resp => resp.json())
         .then(data => {
           this.setState({

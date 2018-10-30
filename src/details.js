@@ -4,7 +4,6 @@ import Card from '@material-ui/core/Card'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon'
-import { get } from 'http'
 
 const styles = {
   parentContainer: {
@@ -108,13 +107,13 @@ export default class Details extends React.Component {
     }
   }
   componentDidMount() {
-    fetch(`/prospects/${this.props.jobId}`, get)
+    fetch(`/prospects/${this.props.jobId}`)
       .then(resp => resp.json())
       .then(data => {
         this.setState({ job: data })
       })
       .catch(err => console.log(err))
-    fetch('/events', get)
+    fetch('/events')
       .then(resp => resp.json())
       .then(data => {
         this.setState({ events: data })

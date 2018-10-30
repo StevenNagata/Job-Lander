@@ -8,7 +8,6 @@ import Card from '@material-ui/core/Paper'
 import Icon from '@material-ui/core/Icon'
 import Typography from '@material-ui/core/Typography'
 import Modal from '@material-ui/core/Modal'
-import { get } from 'http'
 
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true
 
@@ -108,7 +107,7 @@ export default class EditJobForm extends React.Component {
     this.confirmDelete = this.confirmDelete.bind(this)
   }
   componentDidMount() {
-    fetch(`/prospects/${this.props.jobId}`, get)
+    fetch(`/prospects/${this.props.jobId}`)
       .then(resp => resp.json())
       .then(data => {
         this.setState({
