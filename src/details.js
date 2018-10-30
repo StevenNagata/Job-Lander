@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
+import Modal from '@material-ui/core/Modal'
 
 import Menu from '@material-ui/core/Menu'
 
@@ -106,6 +107,29 @@ const styles = {
     bottom: '0',
     color: '#3B3B3B',
     padding: '0'
+  },
+  eventButton: {
+    width: '4rem'
+  },
+  modal: {
+    position: 'relative',
+    top: '10rem',
+    margin: '0 auto',
+    padding: '1rem',
+    width: '15rem',
+    backgroundColor: '#E8F1F3',
+    boxShadow: '#068587',
+    textAlign: 'center'
+  },
+  cancel: {
+    color: 'white',
+    margin: '0.3rem',
+    backgroundColor: '#505959'
+  },
+  confirmDelete: {
+    color: 'white',
+    margin: '0.3rem',
+    backgroundColor: '#ed553b'
   }
 }
 
@@ -130,6 +154,9 @@ export default class Details extends React.Component {
         this.setState({ events: data })
       })
       .catch(err => console.log(err))
+  }
+  confirmDelete(id) {
+    console.log(id)
   }
   render() {
     if (!this.state.job) {
@@ -199,7 +226,7 @@ export default class Details extends React.Component {
                             </Grid>
                           </Grid>
                         </Grid>
-                        <FadeMenu style={styles.menu} event={event} />
+                        <FadeMenu style={styles.menu} event={event} handleOpen={this.handleOpen} confirmDelete={this.confirmDelete}/>
                       </Card>
                     </div>
                   )
@@ -223,19 +250,30 @@ class FadeMenu extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      anchorEl: null
+      anchorEl: null,
+      open: false
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleClose = this.handleClose.bind(this)
+    this.handleEdit = this.handleEdit.bind(this)
+    this.openModal = this.openModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
   }
   handleClick(event) {
     this.setState({ anchorEl: event.currentTarget })
   }
-
   handleClose() {
     this.setState({ anchorEl: null })
-  };
-
+  }
+  handleEdit() {
+    location.hash = `#editEvent?uniqueId=${this.props.event.id}`
+  }
+  openModal() {
+    this.setState({open: true})
+  }
+  closeModal() {
+    this.setState({open: false})
+  }
   render() {
     const { anchorEl } = this.state
     const open = Boolean(anchorEl)
@@ -256,9 +294,22 @@ class FadeMenu extends React.Component {
           onClose={this.handleClose}
           TransitionComponent={Fade}
         >
-          <MenuItem ><Button href={`#editEvent?uniqueId=${this.props.event.id}`}>Edit</Button></MenuItem>
-          <MenuItem onClick={this.handleClose}>Delete</MenuItem>
+          <MenuItem onClick={this.handleEdit}>Edit</MenuItem>
+          <MenuItem onClick={this.openModal}>Delete</MenuItem>
         </Menu>
+        <Modal
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          open={this.state.open}
+        >
+          <div style={styles.modal}>
+            <Typography variant="subtitle1" id="modal-title">
+              Are you sure you want to delete this job prospect?
+            </Typography>
+            <Button style={styles.cancel} onClick={this.closeModal} aria-label="cancel">Cancel</Button>
+            <Button onClick={() => this.props.confirmDelete(this.props.event.id)} style={styles.confirmDelete} aria-label="delete">Delete</Button>
+          </div>
+        </Modal>
       </div>
     )
   }
