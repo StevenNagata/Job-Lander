@@ -166,8 +166,22 @@ export default class App extends React.Component {
       })
       .catch(err => console.log(err))
   }
-  deleteEvent(id) {
-    console.log(id)
+  deleteEvent(deletedevent) {
+    console.log(deletedevent)
+    fetch(`/events/${deletedevent.id}`, {
+      method: 'DELETE'
+    })
+      .then(resp => resp.json())
+      .then(() => {
+        const updated = this.state.events.filter(event => event.id !== deletedevent.id)
+        return updated
+      })
+      .then(events => {
+        this.setState({ events }, () => {
+          location.hash = `#details?uniqueId=${deletedevent.jobId}`
+        })
+      })
+      .catch(err => console.log(err))
   }
   renderView() {
     const { path, params } = this.state.view

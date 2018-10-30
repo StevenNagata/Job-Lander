@@ -155,8 +155,8 @@ export default class Details extends React.Component {
       })
       .catch(err => console.log(err))
   }
-  confirmDelete(id) {
-    console.log(id)
+  confirmDelete(event) {
+    console.log(event)
   }
   render() {
     if (!this.state.job) {
@@ -307,7 +307,7 @@ class FadeMenu extends React.Component {
               Are you sure you want to delete this job prospect?
             </Typography>
             <Button style={styles.cancel} onClick={this.closeModal} aria-label="cancel">Cancel</Button>
-            <Button onClick={() => this.props.confirmDelete(this.props.event.id)} style={styles.confirmDelete} aria-label="delete">Delete</Button>
+            <Button onClick={() => this.props.confirmDelete(this.props.event)} style={styles.confirmDelete} aria-label="delete">Delete</Button>
           </div>
         </Modal>
       </div>
