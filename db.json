@@ -3,10 +3,10 @@
     {
       "id": 1,
       "company": "Ubisoft",
-      "title": "Backend Developer 2",
+      "title": "Backend Developer 3",
       "description": "Looking for self-starting engineers with strong experience developing sophisticated applications on the iPhone or iPad using the iOS SDK.\nIf you're interested in joining a team of passionate, extremely talented industry veterans in the mobile space, who like to work hard and play hard, we look forward to hearing from you soon!",
       "details": "MINIMUM QUALIFICATIONS \n- Extensive knowledge of object-oriented software development\n- Experience building complex applications for the iPhone or iPad using Objective-C / C++ with Cocoa and other frameworks\n- Mobile application development at the user interface and system levels\n- Ability to understand and debug large and complex code bases\n- Experience designing clean and maintainable APIs\n- Experience with multithreaded programming\n- Experience writing unit tests and testable code",
-      "status": "Phone Interviewing"
+      "status": "Interviewing"
     },
     {
       "id": 2,
@@ -45,7 +45,7 @@
       "title": "example title",
       "description": "example desc",
       "details": "none",
-      "status": "",
+      "status": "Offered",
       "id": 8
     }
   ],
@@ -76,60 +76,6 @@
       "details": "YAHZ!",
       "nextStep": "Start Nov 17th",
       "id": 3
-    },
-    {
-      "jobId": 8,
-      "title": "2222",
-      "status": "Applied/Waiting for Response",
-      "date": "10/29/2018",
-      "details": "22",
-      "nextStep": "2",
-      "id": 4
-    },
-    {
-      "jobId": 8,
-      "title": "rrr",
-      "status": "Interviewing",
-      "date": "10/29/2018",
-      "details": "rrr",
-      "nextStep": "rrrr",
-      "id": 5
-    },
-    {
-      "jobId": 8,
-      "title": "3333",
-      "status": "Applied/Waiting for Response",
-      "date": "10/29/2018",
-      "details": "33",
-      "nextStep": "333",
-      "id": 6
-    },
-    {
-      "jobId": 8,
-      "title": "444444",
-      "status": "Applied/Waiting for Response",
-      "date": "10/30/2018",
-      "details": "44444",
-      "nextStep": "44444",
-      "id": 7
-    },
-    {
-      "jobId": 8,
-      "title": "www",
-      "status": "",
-      "date": "10/29/2018",
-      "details": "wwww",
-      "nextStep": "ww",
-      "id": 8
-    },
-    {
-      "jobId": 8,
-      "title": "wwww",
-      "status": "",
-      "date": "10/29/2018",
-      "details": "www",
-      "nextStep": "ww",
-      "id": 9
     }
   ]
 }

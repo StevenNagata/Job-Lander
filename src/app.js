@@ -198,10 +198,8 @@ export default class App extends React.Component {
           <EventForm jobId={jobId} saveAnEvent={this.saveAnEvent} />
         )
       case 'editEvent':
-        const eventId = parseInt(params.uniqueId, 10)
-        const currentEditedEvent = this.state.events.find(event => event.id === eventId)
         return (
-          <EventForm editedEvent={currentEditedEvent} isEdit saveEditedEvent={this.saveEditedEvent} />
+          <EventForm eventId={parseInt(params.uniqueId, 10)} isEdit saveEditedEvent={this.saveEditedEvent} />
         )
       default:
         return (

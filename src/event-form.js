@@ -6,6 +6,7 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import MenuItem from '@material-ui/core/MenuItem'
 import { DatePicker } from 'material-ui-pickers'
 import Button from '@material-ui/core/Button'
+import { get } from 'http'
 
 const options = [
   {
@@ -120,11 +121,24 @@ export default class EventForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      event: null,
       currentJobId: this.props.jobId,
       editedEvent: this.props.editedEvent
     }
     this.saveEvent = this.saveEvent.bind(this)
     this.saveEdited = this.saveEdited.bind(this)
+  }
+  componentDidMount() {
+    if (this.props.isEdit) {
+      fetch(`/events/${this.props.eventId}`, get)
+        .then(resp => resp.json())
+        .then(data => {
+          this.setState({
+            event: data
+          })
+        })
+        .catch(err => console.log(err))
+    }
   }
   saveEvent(event) {
     event.preventDefault()
@@ -140,7 +154,6 @@ export default class EventForm extends React.Component {
   }
   saveEdited(event) {
     event.preventDefault()
-    console.log(location.hash)
     const editedEvent = {
       title: event.target.eventtitle.value,
       status: event.target.status.value,
@@ -151,18 +164,25 @@ export default class EventForm extends React.Component {
     this.props.saveEditedEvent(editedEvent)
   }
   render() {
-    if (this.props.isEdit) {
-      if (!this.props.editedEvent) {
-        return null
-      }
+    if (this.props.isEdit && !this.state.event) {
+      return null
     }
-    const save = this.props.isEdit ? this.saveEdited : this.saveEvent
-    const header = this.props.isEdit ? 'Edit Event' : 'Create New Event'
-    const editTitle = this.props.isEdit ? this.props.editedEvent.title : ''
-    const editDate = this.props.isEdit ? this.props.editedEvent.date : new Date()
-    const editStatus = this.props.isEdit ? this.props.editedEvent.status : 'Interested'
-    const editDetails = this.props.isEdit ? this.props.editedEvent.details : ''
-    const editNextStep = this.props.isEdit ? this.props.editedEvent.nextStep : ''
+    let save = this.saveEvent
+    let header = 'Create New Event'
+    let editTitle = ''
+    let editDate = new Date()
+    let editStatus = 'Interested'
+    let editDetails = ''
+    let editNextStep = ''
+    if (this.state.event) {
+      save = this.saveEdited
+      header = 'Edit Event'
+      editTitle = this.state.event.title
+      editDate = this.state.event.date
+      editStatus = this.state.event.status
+      editDetails = this.state.event.details
+      editNextStep = this.state.event.nextStep
+    }
     return (
       <div style={styles.container}>
         <form
