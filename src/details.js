@@ -155,6 +155,8 @@ export default class Details extends React.Component {
   }
   confirmDelete(event) {
     this.props.deleteEvent(event)
+    const updatedWithDelete = this.state.events.filter(e => e.id !== event.id)
+    this.setState({ events: updatedWithDelete })
   }
   render() {
     if (!this.state.job) {
