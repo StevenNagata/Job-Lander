@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon'
+import { get } from 'http'
 
 const styles = {
   parentContainer: {
@@ -102,14 +103,35 @@ export default class Details extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      mobileView: true
+      job: '',
+      events: []
     }
   }
+  componentDidMount() {
+    fetch(`/prospects/${this.props.jobId}`, get)
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({ job: data })
+      })
+      .catch(err => console.log(err))
+    fetch('/events', get)
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({ events: data })
+      })
+      .catch(err => console.log(err))
+  }
   render() {
-    if (!this.props.job) {
+    if (!this.state.job) {
       return null
     }
-    const { id, company, title, description, status, details } = this.props.job
+    const events = this.state.events.filter(event => event.jobId === parseInt(this.state.job.id, 10))
+    events.sort(function (a, b) {
+      let dateA = new Date(a.date)
+      let dateB = new Date(b.date)
+      return dateA - dateB
+    })
+    const { id, company, title, description, status, details } = this.state.job
     return (
       <div style={styles.parentContainer}>
         <div style={styles.center}>
@@ -144,7 +166,7 @@ export default class Details extends React.Component {
               </Grid>
 
               {
-                this.props.events.map(event => {
+                events.map(event => {
                   return (
                     <div style={styles.timelineDiv} key={event.id}>
                       <Card style={styles.timelineCard}>
@@ -176,7 +198,7 @@ export default class Details extends React.Component {
                 })
               }
               <Grid style={styles.addEventGrid} item xs={12}>
-                <Button style={styles.addEvent} href={`#newevent?uniqueId=${this.props.job.id}`}>Add Event</Button>
+                <Button style={styles.addEvent} href={`#newevent?uniqueId=${this.state.job.id}`}>Add Event</Button>
               </Grid>
             </Grid>
             <Button id="editButton" href={`#edit?uniqueId=${id}`} variant="fab" aria-label="Edit">

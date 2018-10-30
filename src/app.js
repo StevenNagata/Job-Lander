@@ -180,17 +180,10 @@ export default class App extends React.Component {
           </div>
         )
       case 'details':
-        const job = this.state.prospects.find(job => job.id === parseInt(params.uniqueId, 10))
-        const events = this.state.events.filter(event => event.jobId === parseInt(params.uniqueId, 10))
-        events.sort(function (a, b) {
-          let dateA = new Date(a.date)
-          let dateB = new Date(b.date)
-          return dateA - dateB
-        })
         return (
           <div>
             <Navbar />
-            <Details job={job} events={events} editProspect={this.editProspect} />
+            <Details jobId={parseInt(params.uniqueId, 10)} editProspect={this.editProspect} />
           </div>
         )
       case 'edit':
