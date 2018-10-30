@@ -142,7 +142,6 @@ export default class App extends React.Component {
     const jsonEvent = JSON.stringify(updatedEvent)
     const eventId = parseInt(this.state.view.params.uniqueId, 10)
     let jobId = ''
-    console.log(jsonEvent)
     fetch(`/events/${eventId}`, {
       method: 'PATCH',
       headers: { 'content-type': 'application/json' },
