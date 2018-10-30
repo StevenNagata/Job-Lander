@@ -6,11 +6,8 @@ import Button from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import Modal from '@material-ui/core/Modal'
-
 import Menu from '@material-ui/core/Menu'
-
 import Fade from '@material-ui/core/Fade'
-
 import MenuItem from '@material-ui/core/MenuItem'
 
 const styles = {
@@ -140,6 +137,7 @@ export default class Details extends React.Component {
       job: '',
       events: []
     }
+    this.confirmDelete = this.confirmDelete.bind(this)
   }
   componentDidMount() {
     fetch(`/prospects/${this.props.jobId}`)
@@ -156,7 +154,7 @@ export default class Details extends React.Component {
       .catch(err => console.log(err))
   }
   confirmDelete(event) {
-    console.log(event)
+    this.props.deleteEvent(event)
   }
   render() {
     if (!this.state.job) {

@@ -25,6 +25,7 @@ export default class App extends React.Component {
     this.deleteProspect = this.deleteProspect.bind(this)
     this.saveAnEvent = this.saveAnEvent.bind(this)
     this.saveEditedEvent = this.saveEditedEvent.bind(this)
+    this.deleteEvent = this.deleteEvent.bind(this)
   }
   componentDidMount() {
     fetch('/prospects/')
@@ -167,19 +168,16 @@ export default class App extends React.Component {
       .catch(err => console.log(err))
   }
   deleteEvent(deletedevent) {
-    console.log(deletedevent)
     fetch(`/events/${deletedevent.id}`, {
-      method: 'DELETE'
+      method: 'Delete'
     })
-      .then(resp => resp.json())
+      .then(response => response.json())
       .then(() => {
-        const updated = this.state.events.filter(event => event.id !== deletedevent.id)
-        return updated
+        const updatedWithDelete = this.state.events.filter(event => event.id !== deletedevent.id)
+        return updatedWithDelete
       })
       .then(events => {
-        this.setState({ events }, () => {
-          location.hash = `#details?uniqueId=${deletedevent.jobId}`
-        })
+        this.setState({ events })
       })
       .catch(err => console.log(err))
   }
