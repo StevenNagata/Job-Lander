@@ -25,6 +25,7 @@ export default class App extends React.Component {
     this.deleteProspect = this.deleteProspect.bind(this)
     this.saveAnEvent = this.saveAnEvent.bind(this)
     this.saveEditedEvent = this.saveEditedEvent.bind(this)
+    this.deleteEvent = this.deleteEvent.bind(this)
   }
   componentDidMount() {
     fetch('/prospects/')
@@ -166,7 +167,20 @@ export default class App extends React.Component {
       })
       .catch(err => console.log(err))
   }
-
+  deleteEvent(deletedevent) {
+    fetch(`/events/${deletedevent.id}`, {
+      method: 'Delete'
+    })
+      .then(response => response.json())
+      .then(() => {
+        const updatedWithDelete = this.state.events.filter(event => event.id !== deletedevent.id)
+        return updatedWithDelete
+      })
+      .then(events => {
+        this.setState({ events })
+      })
+      .catch(err => console.log(err))
+  }
   renderView() {
     const { path, params } = this.state.view
     switch (path) {
@@ -181,7 +195,7 @@ export default class App extends React.Component {
         return (
           <div>
             <Navbar />
-            <Details jobId={parseInt(params.uniqueId, 10)} editProspect={this.editProspect} />
+            <Details jobId={parseInt(params.uniqueId, 10)} editProspect={this.editProspect} deleteEvent={this.deleteEvent} />
           </div>
         )
       case 'edit':

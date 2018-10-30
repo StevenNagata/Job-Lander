@@ -38,14 +38,14 @@
       "title": "Junior Developer 3",
       "description": "As a junior developer you will work with a team to help create the software and websites that enable brands to thrive. You will be exposed to new technologies and will help craft modern websites and to showcase how customers interact with the brands they care about.\n\nQualifications:\n\nA technical degree, certificate or equivalent experience\nExperience developing software and/or web applications\nExcellent verbal and written communication skills; ability to think outside the box and adapt to change",
       "details": "Required Technologies\n\nPHP\nHTML5\nCSS/SCSS\nJavaScript/ECMA Script\nAt least a basic understanding of SQL and Databases\nVersion control technology such as GIT\n\nNice to haves:\n\nExperience working with WordPress and/or Drupal\nExperience with ASP.NET\nExperience with Laravel and/or CodeIgniter\nExperience with Mobile Technologies such as Xamarin, Android, Kotlin and Swift\nExperience with Vagrant\nExperience with React.js, Vue.js or Angular.js\n\nPerks\n\nFlexible PTO\n401k program\nFull Medical",
-      "status": "Offered"
+      "status": "Interested"
     },
     {
       "company": "example company",
       "title": "example title",
       "description": "example desc",
       "details": "none",
-      "status": "Offered",
+      "status": "Interested",
       "id": 8
     }
   ],
@@ -56,12 +56,12 @@
       "status": "Applied/Waiting for Response",
       "date": "10/25/2018",
       "details": "- Sent in Resume and cover letter to HR.\n- Typical wait time is around 1 week.\n- Job description was heavily JavaScript!!\n",
-      "nextStep": "Wait to hear back!!!🙏",
+      "nextStep": "Wait to hear back!!! PLAYYYA🙏🌚",
       "id": 1
     },
     {
       "jobId": 6,
-      "title": "THE PHONE INTERVIEW!!🤘",
+      "title": "THE PHONE INTERVIEW!!🤘🙌",
       "status": "Phone Interviewing",
       "date": "10/28/2018",
       "details": "- Had a phone interview with Josh (HR) \n- Told him my strengths were: \n  - Self-driven\n  - Hard worker \n- Told him my weaknesses were: \n  - Sometimes I get caught up in development that I can start working on other features before fully closing out the initial feature I'm working on",
@@ -70,11 +70,11 @@
     },
     {
       "jobId": 6,
-      "title": "GOT THE JOB",
+      "title": "GOT THE JOB!!!",
       "status": "Offered",
       "date": "10/31/2018",
       "details": "YAHZ!",
-      "nextStep": "Start Nov 17th",
+      "nextStep": "Start Nov 19th",
       "id": 3
     }
   ]
