@@ -304,7 +304,7 @@ class FadeMenu extends React.Component {
         >
           <div style={styles.modal}>
             <Typography variant="subtitle1" id="modal-title">
-              Are you sure you want to delete this job prospect?
+              Are you sure you want to delete this event?
             </Typography>
             <Button style={styles.cancel} onClick={this.closeModal} aria-label="cancel">Cancel</Button>
             <Button onClick={() => this.props.confirmDelete(this.props.event)} style={styles.confirmDelete} aria-label="delete">Delete</Button>
