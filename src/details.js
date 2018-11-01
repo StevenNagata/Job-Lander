@@ -124,6 +124,13 @@ const styles = {
     color: 'white',
     margin: '0.3rem',
     backgroundColor: '#ed553b'
+  },
+  addFile: {
+    fontSize: '0.7rem'
+  },
+  addFileIcon: {
+    position: 'relative',
+    top: '6px'
   }
 }
 
@@ -194,6 +201,18 @@ export default class Details extends React.Component {
               </Grid>
               <Grid item xs={12}>
                 <Typography style={styles.paragraph}>{details}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body2"><strong>Files:</strong></Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <div style={styles.paragraph}>
+                  <form action="/files" method="post" encType="multipart/form-data">
+                    <input type="file" name="testdoc" />
+                    <input type="hidden" name='jobId' value='1' />
+                    <button type="submit">Submit</button>
+                  </form>
+                </div>
               </Grid>
               <Grid item xs={12}>
                 <Typography variant="body2"><strong>Timeline:</strong></Typography>
