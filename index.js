@@ -39,7 +39,7 @@ app.post('/files', upload.single('testdoc'), (req, res) => {
   const file = {
     location: req.file.location,
     name: req.file.originalname,
-    jobId: req.body.jobId
+    jobId: parseInt(req.body.jobId, 10)
   }
   db.get('files')
     .insert(file)

@@ -125,12 +125,12 @@ const styles = {
     margin: '0.3rem',
     backgroundColor: '#ed553b'
   },
-  addFile: {
+  chooseFile: {
     fontSize: '0.7rem'
   },
-  addFileIcon: {
-    position: 'relative',
-    top: '6px'
+  files: {
+    fontSize: '0.7rem',
+    margin: '1% 0'
   }
 }
 
@@ -139,7 +139,8 @@ export default class Details extends React.Component {
     super(props)
     this.state = {
       job: '',
-      events: []
+      events: [],
+      files: []
     }
     this.confirmDelete = this.confirmDelete.bind(this)
   }
@@ -150,10 +151,16 @@ export default class Details extends React.Component {
         this.setState({ job: data })
       })
       .catch(err => console.log(err))
-    fetch('/events')
+    fetch(`/events/?jobId=${this.props.jobId}`)
       .then(resp => resp.json())
       .then(data => {
         this.setState({ events: data })
+      })
+      .catch(err => console.log(err))
+    fetch(`/files/?jobId=${this.props.jobId}`)
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({ files: data })
       })
       .catch(err => console.log(err))
   }
@@ -166,6 +173,7 @@ export default class Details extends React.Component {
     if (!this.state.job) {
       return null
     }
+    const { files } = this.state
     const events = this.state.events.filter(event => event.jobId === parseInt(this.state.job.id, 10))
     events.sort(function (a, b) {
       let dateA = new Date(a.date)
@@ -207,8 +215,23 @@ export default class Details extends React.Component {
               </Grid>
               <Grid item xs={12}>
                 <div style={styles.paragraph}>
+                  {
+                    files.map(file => {
+                      return (
+                        <div key={file.id}>
+                          <Typography style={styles.files}>
+                            <a href={file.location}
+                              rel="noopener noreferrer"
+                              target="_blank" >
+                              {file.name}
+                            </a>
+                          </Typography>
+                        </div>
+                      )
+                    })
+                  }
                   <form action="/files" method="post" encType="multipart/form-data">
-                    <input type="file" name="testdoc" />
+                    <input type="file" name="testdoc" style={styles.chooseFile}/>
                     <input type="hidden" name='jobId' value={this.state.job.id} />
                     <button type="submit">Submit</button>
                   </form>
