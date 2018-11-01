@@ -209,7 +209,7 @@ export default class Details extends React.Component {
                 <div style={styles.paragraph}>
                   <form action="/files" method="post" encType="multipart/form-data">
                     <input type="file" name="testdoc" />
-                    <input type="hidden" name='jobId' value='1' />
+                    <input type="hidden" name='jobId' value={this.state.job.id} />
                     <button type="submit">Submit</button>
                   </form>
                 </div>
