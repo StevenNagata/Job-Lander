@@ -80,40 +80,10 @@
   ],
   "files": [
     {
-      "location": "https://joblander.s3.amazonaws.com/1541109546494",
-      "name": "-files-9ca-9ca38f3920d41f12bc007819cca8fe9f.docx",
-      "jobId": 1,
-      "id": "65a9a368-a2c2-4ae5-a6b8-1a9d660b783a"
-    },
-    {
-      "location": "https://joblander.s3.us-west-1.amazonaws.com/1541109752365",
-      "name": "DOC1.docx",
-      "jobId": 1,
-      "id": "4dc9a284-d6cc-4d81-816a-f96e6a80e7bd"
-    },
-    {
-      "location": "https://joblander.s3.us-west-1.amazonaws.com/1541109789273",
-      "name": "MATH 140A_Winter2015.pdf",
+      "location": "https://joblander.s3.amazonaws.com/1541191514708.docx",
+      "name": "CBresume.docx",
       "jobId": 8,
-      "id": "46c5e799-5614-49fe-8fb8-405cabd53014"
-    },
-    {
-      "location": "https://joblander.s3.amazonaws.com/1541110174103",
-      "name": "Homework-4.pdf",
-      "jobId": 8,
-      "id": "6dd86923-b4b3-467a-9d89-dfac165d65e5"
-    },
-    {
-      "location": "https://joblander.s3.amazonaws.com/1541111481261",
-      "name": "~$Resume.docx",
-      "jobId": 8,
-      "id": "d8e360c6-0d8f-4150-9517-74cf9ad0ca6b"
-    },
-    {
-      "location": "https://joblander.s3.us-west-1.amazonaws.com/1541111566166",
-      "name": "~$Resume.docx",
-      "jobId": 8,
-      "id": "a3a0f099-fe95-487b-9783-259dbc4e1c67"
+      "id": 1
     }
   ]
 }

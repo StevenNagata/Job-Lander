@@ -143,6 +143,7 @@ export default class Details extends React.Component {
       files: []
     }
     this.confirmDelete = this.confirmDelete.bind(this)
+    this.newFile = this.newFile.bind(this)
   }
   componentDidMount() {
     fetch(`/prospects/${this.props.jobId}`)
@@ -168,6 +169,18 @@ export default class Details extends React.Component {
     this.props.deleteEvent(event)
     const updatedWithDelete = this.state.events.filter(e => e.id !== event.id)
     this.setState({ events: updatedWithDelete })
+  }
+  newFile(event) {
+    event.preventDefault()
+    let fileData = new FormData(event.target)
+    fetch('/files', {
+      method: 'post',
+      body: fileData
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({files: [...this.state.files, data]})
+      })
   }
   render() {
     if (!this.state.job) {
@@ -230,8 +243,11 @@ export default class Details extends React.Component {
                       )
                     })
                   }
-                  <form action="/files" method="post" encType="multipart/form-data">
-                    <input type="file" name="testdoc" style={styles.chooseFile}/>
+                  <form
+                    id="file-form" onSubmit={this.newFile}
+                    // action="/files" method="post"
+                    encType="multipart/form-data">
+                    <input type="file" name="testdoc" style={styles.chooseFile} />
                     <input type="hidden" name='jobId' value={this.state.job.id} />
                     <button type="submit">Submit</button>
                   </form>
