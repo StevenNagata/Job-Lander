@@ -140,10 +140,13 @@ export default class Details extends React.Component {
     this.state = {
       job: '',
       events: [],
-      files: []
+      files: [],
+      uploadDoc: null
     }
+    this.textInput = React.createRef()
     this.confirmDelete = this.confirmDelete.bind(this)
     this.newFile = this.newFile.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
   componentDidMount() {
     fetch(`/prospects/${this.props.jobId}`)
@@ -165,6 +168,18 @@ export default class Details extends React.Component {
       })
       .catch(err => console.log(err))
   }
+  handleChange(event) {
+    if (event.target.files[0] === undefined) {
+      this.setState({
+        uploadDoc: null
+      })
+    }
+    else {
+      this.setState({
+        uploadDoc: event.target.files[0].name
+      })
+    }
+  }
   confirmDelete(event) {
     this.props.deleteEvent(event)
     const updatedWithDelete = this.state.events.filter(e => e.id !== event.id)
@@ -179,13 +194,14 @@ export default class Details extends React.Component {
     })
       .then(resp => resp.json())
       .then(data => {
-        this.setState({files: [...this.state.files, data]})
+        this.setState({ files: [...this.state.files, data] })
       })
   }
   render() {
     if (!this.state.job) {
       return null
     }
+    const documentUpload = this.state.uploadDoc ? this.state.uploadDoc : 'Choose a File...'
     const { files } = this.state
     const events = this.state.events.filter(event => event.jobId === parseInt(this.state.job.id, 10))
     events.sort(function (a, b) {
@@ -244,12 +260,12 @@ export default class Details extends React.Component {
                     })
                   }
                   <form
-                    id="file-form" onSubmit={this.newFile}
-                    // action="/files" method="post"
+                    onSubmit={this.newFile}
                     encType="multipart/form-data">
-                    <input type="file" name="testdoc" style={styles.chooseFile} />
+                    <input ref={this.textInput} id="fileSelect" onChange={this.handleChange} type="file" name="testdoc" style={styles.chooseFile} />
+                    <label id="fileSelectLabel" htmlFor="fileSelect">{documentUpload}</label>
                     <input type="hidden" name='jobId' value={this.state.job.id} />
-                    <button type="submit">Submit</button>
+                    <button id="submit" type="submit">Submit</button>
                   </form>
                 </div>
               </Grid>
