@@ -124,6 +124,13 @@ const styles = {
     color: 'white',
     margin: '0.3rem',
     backgroundColor: '#ed553b'
+  },
+  chooseFile: {
+    fontSize: '0.7rem'
+  },
+  files: {
+    fontSize: '0.7rem',
+    margin: '1% 0'
   }
 }
 
@@ -132,9 +139,14 @@ export default class Details extends React.Component {
     super(props)
     this.state = {
       job: '',
-      events: []
+      events: [],
+      files: [],
+      uploadDoc: null
     }
+    this.textInput = React.createRef()
     this.confirmDelete = this.confirmDelete.bind(this)
+    this.newFile = this.newFile.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
   componentDidMount() {
     fetch(`/prospects/${this.props.jobId}`)
@@ -143,22 +155,54 @@ export default class Details extends React.Component {
         this.setState({ job: data })
       })
       .catch(err => console.log(err))
-    fetch('/events')
+    fetch(`/events/?jobId=${this.props.jobId}`)
       .then(resp => resp.json())
       .then(data => {
         this.setState({ events: data })
       })
       .catch(err => console.log(err))
+    fetch(`/files/?jobId=${this.props.jobId}`)
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({ files: data })
+      })
+      .catch(err => console.log(err))
+  }
+  handleChange(event) {
+    if (event.target.files[0] === undefined) {
+      this.setState({
+        uploadDoc: null
+      })
+    }
+    else {
+      this.setState({
+        uploadDoc: event.target.files[0].name
+      })
+    }
   }
   confirmDelete(event) {
     this.props.deleteEvent(event)
     const updatedWithDelete = this.state.events.filter(e => e.id !== event.id)
     this.setState({ events: updatedWithDelete })
   }
+  newFile(event) {
+    event.preventDefault()
+    let fileData = new FormData(event.target)
+    fetch('/files', {
+      method: 'post',
+      body: fileData
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({ files: [...this.state.files, data] })
+      })
+  }
   render() {
     if (!this.state.job) {
       return null
     }
+    const documentUpload = this.state.uploadDoc ? this.state.uploadDoc : 'Choose a File...'
+    const { files } = this.state
     const events = this.state.events.filter(event => event.jobId === parseInt(this.state.job.id, 10))
     events.sort(function (a, b) {
       let dateA = new Date(a.date)
@@ -194,6 +238,36 @@ export default class Details extends React.Component {
               </Grid>
               <Grid item xs={12}>
                 <Typography style={styles.paragraph}>{details}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body2"><strong>Files:</strong></Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <div style={styles.paragraph}>
+                  {
+                    files.map(file => {
+                      return (
+                        <div key={file.id}>
+                          <Typography style={styles.files}>
+                            <a href={file.location}
+                              rel="noopener noreferrer"
+                              target="_blank" >
+                              {file.name}
+                            </a>
+                          </Typography>
+                        </div>
+                      )
+                    })
+                  }
+                  <form
+                    onSubmit={this.newFile}
+                    encType="multipart/form-data">
+                    <input ref={this.textInput} id="fileSelect" onChange={this.handleChange} type="file" name="testdoc" style={styles.chooseFile} />
+                    <label id="fileSelectLabel" htmlFor="fileSelect">{documentUpload}</label>
+                    <input type="hidden" name='jobId' value={this.state.job.id} />
+                    <button id="submit" type="submit">Submit</button>
+                  </form>
+                </div>
               </Grid>
               <Grid item xs={12}>
                 <Typography variant="body2"><strong>Timeline:</strong></Typography>

@@ -7,6 +7,37 @@
   z-index: 3;
 }
 
+#fileSelect {
+  width: 0.1px;
+  height: 0.1px;
+}
+
+#fileSelectLabel {
+  font-size: 0.7rem;
+  border: solid #3b3b3b;
+  border-width: 1px;
+  border-right: none;
+  max-width: 5rem;
+  border-radius: 5px 0 0 5px;
+  padding: 0.5rem;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+#submit {
+  font-size: 0.7rem;
+  max-width: 5rem;
+  border: solid #3b3b3b;
+  border-width: 1px;
+  border-radius: 0 5px 5px 0;
+  background-color: #4fb99f;
+  padding: 0.5rem;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+#fileSelectLabel:hover {
+  cursor: pointer;
+}
+
 @media (max-width: 700px) {
   #editButton {
     color: white;
