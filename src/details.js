@@ -9,6 +9,7 @@ import Modal from '@material-ui/core/Modal'
 import Menu from '@material-ui/core/Menu'
 import Fade from '@material-ui/core/Fade'
 import MenuItem from '@material-ui/core/MenuItem'
+import FavoriteIcon from '@material-ui/icons/Favorite'
 
 const styles = {
   parentContainer: {
@@ -131,6 +132,17 @@ const styles = {
   files: {
     fontSize: '0.7rem',
     margin: '1% 0'
+  },
+  favorite: {
+    position: 'absolute',
+    top: '3%',
+    right: '3%'
+  },
+  favoriteActive: {
+    position: 'absolute',
+    top: '3%',
+    right: '3%',
+    color: '#ED553B'
   }
 }
 
@@ -209,11 +221,13 @@ export default class Details extends React.Component {
       let dateB = new Date(b.date)
       return dateA - dateB
     })
-    const { id, company, title, description, status, details } = this.state.job
+    const { id, company, title, description, status, details, favorite } = this.state.job
+    const favIcon = favorite ? styles.favoriteActive : styles.favorite
     return (
       <div style={styles.parentContainer}>
         <div style={styles.center}>
           <Card style={styles.card}>
+            <FavoriteIcon style={favIcon} />
             <Grid style={styles.container} container spacing={0}>
               <Grid item xs={12}>
                 <Typography style={styles.title} variant="h6">{title}</Typography>
