@@ -159,6 +159,7 @@ export default class Details extends React.Component {
     this.confirmDelete = this.confirmDelete.bind(this)
     this.newFile = this.newFile.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.toggleFav = this.toggleFav.bind(this)
   }
   componentDidMount() {
     fetch(`/prospects/${this.props.jobId}`)
@@ -179,6 +180,8 @@ export default class Details extends React.Component {
         this.setState({ files: data })
       })
       .catch(err => console.log(err))
+  }
+  toggleFav() {
   }
   handleChange(event) {
     if (event.target.files[0] === undefined) {
@@ -227,7 +230,9 @@ export default class Details extends React.Component {
       <div style={styles.parentContainer}>
         <div style={styles.center}>
           <Card style={styles.card}>
-            <FavoriteIcon style={favIcon} />
+            <FavoriteIcon
+              style={favIcon}
+              onClick={this.toggleFav} />
             <Grid style={styles.container} container spacing={0}>
               <Grid item xs={12}>
                 <Typography style={styles.title} variant="h6">{title}</Typography>
