@@ -135,13 +135,13 @@ const styles = {
   },
   favorite: {
     position: 'absolute',
-    top: '3%',
-    right: '3%'
+    top: '10px',
+    right: '10px'
   },
   favoriteActive: {
     position: 'absolute',
-    top: '3%',
-    right: '3%',
+    top: '10px',
+    right: '10px',
     color: '#ED553B'
   }
 }
@@ -182,6 +182,19 @@ export default class Details extends React.Component {
       .catch(err => console.log(err))
   }
   toggleFav() {
+    const update = this.state.job
+    update.favorite = !update.favorite
+    const jsonProspect = JSON.stringify(update)
+    fetch(`/prospects/${this.props.jobId}`, {
+      method: 'put',
+      headers: { 'content-type': 'application/json' },
+      body: jsonProspect
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({ job: data })
+      })
+      .catch(err => console.log(err))
   }
   handleChange(event) {
     if (event.target.files[0] === undefined) {
