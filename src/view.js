@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
+import FavoriteIcon from '@material-ui/icons/Favorite'
 
 const styles = {
   background: {
@@ -15,6 +16,7 @@ const styles = {
     marginTop: '2%'
   },
   card: {
+    position: 'relative',
     maxWidth: '50rem',
     margin: 'auto',
     marginTop: '2%'
@@ -46,6 +48,18 @@ const styles = {
     maxWidth: '50rem',
     margin: 'auto',
     padding: '0 1%'
+  },
+  favorite: {
+    position: 'absolute',
+    top: '10px',
+    right: '10px',
+    color: '#3b3b3b'
+  },
+  favoriteActive: {
+    position: 'absolute',
+    top: '10px',
+    right: '10px',
+    color: '#ED553B'
   }
 }
 
@@ -55,13 +69,23 @@ export default class ViewProspects extends React.Component {
     this.state = {
     }
   }
+  componentDidMount() {
+    fetch('/prospects/')
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({ prospects: data })
+      })
+  }
   render() {
+    if (!this.state.prospects) {
+      return null
+    }
     return (
       <div style={styles.background}>
         <Grid
           style={styles.grid}>
           {
-            this.props.prospects.map(job => renderJob(job))
+            this.state.prospects.map(job => renderJob(job))
           }
         </Grid>
       </div >
@@ -71,11 +95,13 @@ export default class ViewProspects extends React.Component {
 
 function renderJob(job) {
   const href = `/#details?uniqueId=${job.id}`
+  const favIcon = job.favorite ? styles.favoriteActive : styles.favorite
   return (
     <a href={href} style={styles.ref} key={job.id}>
       <Card
         id={job.id}
         style={styles.card}>
+        <FavoriteIcon style={favIcon} />
         <CardContent>
           <Typography variant="h6" style={styles.title}>
             {

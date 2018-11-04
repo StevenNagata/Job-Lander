@@ -1,20 +1,13 @@
 {
   "prospects": [
     {
-      "id": 1,
-      "company": "Ubisoft",
-      "title": "Backend Developer 3",
-      "description": "Looking for self-starting engineers with strong experience developing sophisticated applications on the iPhone or iPad using the iOS SDK.\nIf you're interested in joining a team of passionate, extremely talented industry veterans in the mobile space, who like to work hard and play hard, we look forward to hearing from you soon!",
-      "details": "MINIMUM QUALIFICATIONS \n- Extensive knowledge of object-oriented software development\n- Experience building complex applications for the iPhone or iPad using Objective-C / C++ with Cocoa and other frameworks\n- Mobile application development at the user interface and system levels\n- Ability to understand and debug large and complex code bases\n- Experience designing clean and maintainable APIs\n- Experience with multithreaded programming\n- Experience writing unit tests and testable code",
-      "status": "Interested"
-    },
-    {
       "id": 2,
       "company": "Facebook",
       "title": "Software Engineer 2",
       "description": "Looking for self-starting engineers with strong experience developing sophisticated applications on the iPhone or iPad using the iOS SDK.\nIf you're interested in joining a team of passionate, extremely talented industry veterans in the mobile space, who like to work hard and play hard, we look forward to hearing from you soon!",
       "details": "MINIMUM QUALIFICATIONS \n - Extensive knowledge of object-oriented software development\n- Experience building complex applications for the iPhone or iPad using Objective-C / C++ with Cocoa and other frameworks\nMobile application development at the user interface and system levels\n- Ability to understand and debug large and complex code bases\n- Experience designing clean and maintainable APIs\n- Experience with multithreaded programming\n- Experience writing unit tests and testable code",
-      "status": "Applied/Waiting for Response"
+      "status": "Applied/Waiting for Response",
+      "favorite": false
     },
     {
       "id": 3,
@@ -22,7 +15,8 @@
       "title": "Software Developer",
       "description": "Looking for self-starting engineers with strong experience developing sophisticated applications on the iPhone or iPad using the iOS SDK.\nIf you're interested in joining a team of passionate, extremely talented industry veterans in the mobile space, who like to work hard and play hard, we look forward to hearing from you soon!",
       "details": "MINIMUM QUALIFICATIONS \r - Extensive knowledge of object-oriented software development\n- Experience building complex applications for the iPhone or iPad using Objective-C / C++ with Cocoa and other frameworks\nMobile application development at the user interface and system levels\n- Ability to understand and debug large and complex code bases\n- Experience designing clean and maintainable APIs\n- Experience with multithreaded programming\n- Experience writing unit tests and testable code",
-      "status": "Interested"
+      "status": "Interested",
+      "favorite": false
     },
     {
       "id": 4,
@@ -30,7 +24,8 @@
       "title": "Software Developer",
       "description": "Looking for self-starting engineers with strong experience developing sophisticated applications on the iPhone or iPad using the iOS SDK.\nIf you're interested in joining a team of passionate, extremely talented industry veterans in the mobile space, who like to work hard and play hard, we look forward to hearing from you soon!",
       "details": "MINIMUM QUALIFICATIONS \n - Extensive knowledge of object-oriented software development\n- Experience building complex applications for the iPhone or iPad using Objective-C / C++ with Cocoa and other frameworks\nMobile application development at the user interface and system levels\n- Ability to understand and debug large and complex code bases\n- Experience designing clean and maintainable APIs\n- Experience with multithreaded programming\n- Experience writing unit tests and testable code",
-      "status": "Interested"
+      "status": "Interested",
+      "favorite": false
     },
     {
       "id": 6,
@@ -38,7 +33,8 @@
       "title": "Junior Developer 3",
       "description": "As a junior developer you will work with a team to help create the software and websites that enable brands to thrive. You will be exposed to new technologies and will help craft modern websites and to showcase how customers interact with the brands they care about.\n\nQualifications:\n\nA technical degree, certificate or equivalent experience\nExperience developing software and/or web applications\nExcellent verbal and written communication skills; ability to think outside the box and adapt to change",
       "details": "Required Technologies\n\nPHP\nHTML5\nCSS/SCSS\nJavaScript/ECMA Script\nAt least a basic understanding of SQL and Databases\nVersion control technology such as GIT\n\nNice to haves:\n\nExperience working with WordPress and/or Drupal\nExperience with ASP.NET\nExperience with Laravel and/or CodeIgniter\nExperience with Mobile Technologies such as Xamarin, Android, Kotlin and Swift\nExperience with Vagrant\nExperience with React.js, Vue.js or Angular.js\n\nPerks\n\nFlexible PTO\n401k program\nFull Medical",
-      "status": "Offered"
+      "status": "Offered",
+      "favorite": true
     },
     {
       "company": "example company",
@@ -46,7 +42,8 @@
       "description": "example desc",
       "details": "none",
       "status": "Offered",
-      "id": 8
+      "id": 8,
+      "favorite": false
     }
   ],
   "events": [
