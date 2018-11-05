@@ -10,10 +10,14 @@ const middleware = server.defaults()
 const router = server.router('db.json')
 const { db } = router
 
+const S3_BUCKET = process.env.S3_BUCKET
+const WS_ACCESS_KEY_ID = process.env.WS_ACCESS_KEY_ID
+const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY
+
 const s3 = new aws.S3({
-  accessKeyId: process.env.IAM_USER_KEY,
-  secretAccessKey: process.env.IAM_USER_SECRET,
-  Bucket: process.env.BUCKET_NAME
+  accessKeyId: WS_ACCESS_KEY_ID,
+  secretAccessKey: AWS_SECRET_ACCESS_KEY,
+  Bucket: S3_BUCKET
 })
 
 const upload = multer({
@@ -21,7 +25,7 @@ const upload = multer({
     s3: s3,
     contentDisposition: 'attachment',
     ACL: 'public-read',
-    bucket: process.env.BUCKET_NAME,
+    bucket: S3_BUCKET,
     metadata: function (req, file, cb) {
       cb(null, Object.assign({}, req.body))
     },
