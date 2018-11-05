@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "webpack-dev-server",
-    "build": "webpack",
+    "build": "webpack src/index.js --output main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "npm-run-all --parallel start dev",
     "postinstall": "npm run build"
