@@ -3,16 +3,12 @@
   "version": "1.0.0",
   "description": "Final Project",
   "main": "index.js",
-  "engines": {
-    "node": "10.0.0"
-  },
   "scripts": {
     "start": "node index.js",
     "dev": "webpack-dev-server",
     "build": "webpack src/index.js --output main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "npm-run-all --parallel start dev",
-    "postinstall": "npm run build"
+    "watch": "npm-run-all --parallel start dev"
   },
   "keywords": [],
   "author": "",
