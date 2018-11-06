@@ -1,9 +1,25 @@
 # Job-Lander
 A full stack JavaScript application for recent graduates who want to organize their job hunt
 
- # Live Demo
+# Live Demo
  https://job-lander.herokuapp.com
- 
+  
+# Usage
+Clone and install dependencies.
+```
+git clone https://github.com/StevenNagata/Job-Lander.git
+cd Job-Lander/
+npm install
+```
+Create an '.env' file in the project root.
+```
+PORT=3000
+```
+Run the application
+```
+npm run watch
+```
+
 # Technologies
 <ul>
 <li>React.js</li>
@@ -19,8 +35,6 @@ A full stack JavaScript application for recent graduates who want to organize th
 <li>Multer S3</li>
   </ul>
  
- # Usage
-
  # App Features
 <ul>
   <li>User can create a job prospect</li>
