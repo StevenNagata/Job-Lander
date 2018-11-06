@@ -14,7 +14,11 @@ npm install
 Create an '.env' file in the project root.
 ```
 PORT=3000
+S3_BUCKET=xxxxxx
+WS_ACCESS_KEY_ID=xxxxxx
+AWS_SECRET_ACCESS_KEY=xxxxxx
 ```
+Note: You will need an AWS bucket to save files to. Update you bucket policy to have public read access.
 Run the application
 ```
 npm run watch
