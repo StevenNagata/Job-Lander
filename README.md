@@ -16,14 +16,13 @@ You will need an AWS bucket to save files to.
 Update you bucket policy to have public read access.
 Put your S3 bucket name, Access key, and secret key into the .env file
 
-Run the application
 ```
 PORT=3000
 S3_BUCKET=xxxxxx
 WS_ACCESS_KEY_ID=xxxxxx
 AWS_SECRET_ACCESS_KEY=xxxxxx
 ```
-
+Run the application
 ```
 npm run watch
 ```
