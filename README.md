@@ -71,4 +71,9 @@ npm run watch
   <li>User can favorite a job prospect</li>
   <br/>
 <img src="https://user-images.githubusercontent.com/42354826/48093328-ec0dcd80-e1c3-11e8-9ca1-49e51742b461.gif"/>
+ <br/>
+   <li>User can add a file to a job prospect</li>
+  <br/>
+<img src="https://user-images.githubusercontent.com/42354826/48100545-9abc0900-e1d8-11e8-8d9c-50553428da4f.gif"/>
+  <br/>
 </ol>
