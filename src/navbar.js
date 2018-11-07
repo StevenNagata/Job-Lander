@@ -13,6 +13,34 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import FilterListIcon from '@material-ui/icons/FilterList'
 
+const filteredBy = [
+  {
+    href: '/#view?filter=intrested',
+    key: 'filter-by-intrested',
+    text: 'Intrested'
+  },
+  {
+    href: '/#view?filter=applied',
+    key: 'filter-by-applied',
+    text: 'Applied'
+  },
+  {
+    href: '/#view?filter=phoneInterviewing',
+    key: 'filter-by-phoneInterviewing',
+    text: 'Phone Interviewing'
+  },
+  {
+    href: '/#view?filter=Interviewing',
+    key: 'filter-by-Interviewing',
+    text: 'Interviewing'
+  },
+  {
+    href: '/#view?filter=Offered',
+    key: 'filter-by-offered',
+    text: 'Offered'
+  }
+]
+
 const styles = {
   nav: {
     height: '45px'
@@ -76,8 +104,6 @@ export default class Navbar extends React.Component {
               <div
                 tabIndex={0}
                 role="button"
-              // onClick={() => this.toggleDrawer('left', false)}
-              // onKeyDown={() => this.toggleDrawer('left', false)}
               >
                 <List>
                   {links.map(link => (
@@ -101,22 +127,17 @@ export default class Navbar extends React.Component {
                     <ListItemIcon><FilterListIcon /></ListItemIcon>
                     <ListItemText primary='Filter Prospects by...' />
                   </ListItem>
+
                   <div style={filter}>
-                    <ListItem button key='filter-by-intrested'>
-                      <ListItemText primary='Intrested' />
-                    </ListItem>
-                    <ListItem button key='filter-by-applied'>
-                      <ListItemText primary='Applied' />
-                    </ListItem>
-                    <ListItem button key='filter-by-phone-interview'>
-                      <ListItemText primary='Phone Interviewing' />
-                    </ListItem>
-                    <ListItem button key='filter-by-interviewing'>
-                      <ListItemText primary='Interviewing' />
-                    </ListItem>
-                    <ListItem button key='filter-by-offered'>
-                      <ListItemText primary='Offered' />
-                    </ListItem>
+                    {
+                      filteredBy.map(status => {
+                        return (
+                          <ListItem button component='a' href={status.href} key={status.key}>
+                            <ListItemText primary={status.text} />
+                          </ListItem>
+                        )
+                      })
+                    }
                   </div>
                 </List>
               </div>
