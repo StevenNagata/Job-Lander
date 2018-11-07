@@ -16,8 +16,7 @@ const styles = {
     backgroundColor: '#E8F1F3',
     padding: '2% auto',
     position: 'absolute',
-    width: '100vw',
-    height: '100vh'
+    width: '100vw'
   },
   card: {
     maxWidth: '50rem',
@@ -260,7 +259,7 @@ export default class Details extends React.Component {
                 <Typography variant="overline" style={styles.status}>Status: {status}</Typography>
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="body2"><strong>Descrption:</strong></Typography>
+                <Typography variant="body2"><strong>Description:</strong></Typography>
               </Grid>
               <Grid>
                 <Typography style={styles.paragraph}>{description}</Typography>

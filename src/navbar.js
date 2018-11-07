@@ -11,6 +11,35 @@ import MenuIcon from '@material-ui/icons/Menu'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+import FilterListIcon from '@material-ui/icons/FilterList'
+
+const filteredBy = [
+  {
+    href: '/#view?filter=Interested',
+    key: 'filter-by-interested',
+    text: 'Interested'
+  },
+  {
+    href: '/#view?filter=Applied',
+    key: 'filter-by-applied',
+    text: 'Applied'
+  },
+  {
+    href: '/#view?filter=PhoneInterviewing',
+    key: 'filter-by-phoneInterviewing',
+    text: 'Phone Interviewing'
+  },
+  {
+    href: '/#view?filter=Interviewing',
+    key: 'filter-by-Interviewing',
+    text: 'Interviewing'
+  },
+  {
+    href: '/#view?filter=Offered',
+    key: 'filter-by-offered',
+    text: 'Offered'
+  }
+]
 
 const styles = {
   nav: {
@@ -18,20 +47,28 @@ const styles = {
   },
   appBar: {
     backgroundColor: '#068587'
+  },
+  hideFilter: {
+    display: 'none'
   }
-
 }
 
 export default class Navbar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      left: false
+      left: false,
+      filterOption: false
     }
     this.toggleDrawer = this.toggleDrawer.bind(this)
+    this.openfilter = this.openfilter.bind(this)
+  }
+  openfilter() {
+    this.setState({ filterOption: !this.state.filterOption })
   }
   toggleDrawer(side, open) {
     this.setState({
+      filterOption: false,
       [side]: open
     })
   }
@@ -50,6 +87,7 @@ export default class Navbar extends React.Component {
         icon: <Visibility />
       }
     ]
+    const filter = this.state.filterOption ? {} : styles.hideFilter
     return (
       <div style={styles.nav}>
         <AppBar position="fixed" style={styles.appBar}>
@@ -66,8 +104,7 @@ export default class Navbar extends React.Component {
               <div
                 tabIndex={0}
                 role="button"
-                onClick={() => this.toggleDrawer('left', false)}
-                onKeyDown={() => this.toggleDrawer('left', false)}>
+              >
                 <List>
                   {links.map(link => (
                     <ListItem
@@ -75,11 +112,37 @@ export default class Navbar extends React.Component {
                       button
                       key={link.id}
                       href={link.href}
+                      onClick={() => this.toggleDrawer('left', false)}
                     >
                       <ListItemIcon>{link.icon}</ListItemIcon>
                       <ListItemText primary={link.value} />
                     </ListItem>
                   ))}
+
+                  <ListItem
+                    button
+                    key='filter-by'
+                    onClick={this.openfilter}
+                  >
+                    <ListItemIcon><FilterListIcon /></ListItemIcon>
+                    <ListItemText primary='Filter Prospects by...' />
+                  </ListItem>
+                  <div style={filter}>
+                    {
+                      filteredBy.map(status => {
+                        return (
+                          <ListItem
+                            button
+                            component='a'
+                            href={status.href}
+                            key={status.key}
+                            onClick={() => this.toggleDrawer('left', false)}>
+                            <ListItemText primary={status.text} />
+                          </ListItem>
+                        )
+                      })
+                    }
+                  </div>
                 </List>
               </div>
             </Drawer>
