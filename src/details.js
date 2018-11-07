@@ -260,7 +260,7 @@ export default class Details extends React.Component {
                 <Typography variant="overline" style={styles.status}>Status: {status}</Typography>
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="body2"><strong>Descrption:</strong></Typography>
+                <Typography variant="body2"><strong>Description:</strong></Typography>
               </Grid>
               <Grid>
                 <Typography style={styles.paragraph}>{description}</Typography>

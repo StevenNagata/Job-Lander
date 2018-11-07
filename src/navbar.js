@@ -11,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+import FilterListIcon from '@material-ui/icons/FilterList'
 
 const styles = {
   nav: {
@@ -29,6 +30,9 @@ export default class Navbar extends React.Component {
       left: false
     }
     this.toggleDrawer = this.toggleDrawer.bind(this)
+  }
+  openfilter() {
+    console.log('hi')
   }
   toggleDrawer(side, open) {
     this.setState({
@@ -66,8 +70,9 @@ export default class Navbar extends React.Component {
               <div
                 tabIndex={0}
                 role="button"
-                onClick={() => this.toggleDrawer('left', false)}
-                onKeyDown={() => this.toggleDrawer('left', false)}>
+              // onClick={() => this.toggleDrawer('left', false)}
+              // onKeyDown={() => this.toggleDrawer('left', false)}
+              >
                 <List>
                   {links.map(link => (
                     <ListItem
@@ -75,11 +80,22 @@ export default class Navbar extends React.Component {
                       button
                       key={link.id}
                       href={link.href}
+                      onClick={() => this.toggleDrawer('left', false)}
                     >
                       <ListItemIcon>{link.icon}</ListItemIcon>
                       <ListItemText primary={link.value} />
                     </ListItem>
                   ))}
+
+                  <ListItem
+                    button
+                    key='filter-by'
+                    onClick={this.openfilter}
+                  >
+                    <ListItemIcon><FilterListIcon /></ListItemIcon>
+                    <ListItemText primary='Filter Prospects by...' />
+                  </ListItem>
+
                 </List>
               </div>
             </Drawer>

@@ -23,6 +23,10 @@
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
+#filter {
+  width: 10rem;
+}
+
 #submit {
   font-size: 0.7rem;
   max-width: 5rem;
