@@ -19,23 +19,28 @@ const styles = {
   },
   appBar: {
     backgroundColor: '#068587'
+  },
+  hideFilter: {
+    display: 'none'
   }
-
 }
 
 export default class Navbar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      left: false
+      left: false,
+      filterOption: false
     }
     this.toggleDrawer = this.toggleDrawer.bind(this)
+    this.openfilter = this.openfilter.bind(this)
   }
   openfilter() {
-    console.log('hi')
+    this.setState({ filterOption: !this.state.filterOption })
   }
   toggleDrawer(side, open) {
     this.setState({
+      filterOption: false,
       [side]: open
     })
   }
@@ -54,6 +59,7 @@ export default class Navbar extends React.Component {
         icon: <Visibility />
       }
     ]
+    const filter = this.state.filterOption ? {} : styles.hideFilter
     return (
       <div style={styles.nav}>
         <AppBar position="fixed" style={styles.appBar}>
@@ -95,7 +101,23 @@ export default class Navbar extends React.Component {
                     <ListItemIcon><FilterListIcon /></ListItemIcon>
                     <ListItemText primary='Filter Prospects by...' />
                   </ListItem>
-
+                  <div style={filter}>
+                    <ListItem button key='filter-by-intrested'>
+                      <ListItemText primary='Intrested' />
+                    </ListItem>
+                    <ListItem button key='filter-by-applied'>
+                      <ListItemText primary='Applied' />
+                    </ListItem>
+                    <ListItem button key='filter-by-phone-interview'>
+                      <ListItemText primary='Phone Interviewing' />
+                    </ListItem>
+                    <ListItem button key='filter-by-interviewing'>
+                      <ListItemText primary='Interviewing' />
+                    </ListItem>
+                    <ListItem button key='filter-by-offered'>
+                      <ListItemText primary='Offered' />
+                    </ListItem>
+                  </div>
                 </List>
               </div>
             </Drawer>
