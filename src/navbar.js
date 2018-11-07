@@ -15,17 +15,17 @@ import FilterListIcon from '@material-ui/icons/FilterList'
 
 const filteredBy = [
   {
-    href: '/#view?filter=intrested',
-    key: 'filter-by-intrested',
-    text: 'Intrested'
+    href: '/#view?filter=Interested',
+    key: 'filter-by-interested',
+    text: 'Interested'
   },
   {
-    href: '/#view?filter=applied',
+    href: '/#view?filter=Applied',
     key: 'filter-by-applied',
     text: 'Applied'
   },
   {
-    href: '/#view?filter=phoneInterviewing',
+    href: '/#view?filter=PhoneInterviewing',
     key: 'filter-by-phoneInterviewing',
     text: 'Phone Interviewing'
   },
@@ -127,12 +127,16 @@ export default class Navbar extends React.Component {
                     <ListItemIcon><FilterListIcon /></ListItemIcon>
                     <ListItemText primary='Filter Prospects by...' />
                   </ListItem>
-
                   <div style={filter}>
                     {
                       filteredBy.map(status => {
                         return (
-                          <ListItem button component='a' href={status.href} key={status.key}>
+                          <ListItem
+                            button
+                            component='a'
+                            href={status.href}
+                            key={status.key}
+                            onClick={() => this.toggleDrawer('left', false)}>
                             <ListItemText primary={status.text} />
                           </ListItem>
                         )

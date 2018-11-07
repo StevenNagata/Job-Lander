@@ -16,8 +16,7 @@ const styles = {
     backgroundColor: '#E8F1F3',
     padding: '2% auto',
     position: 'absolute',
-    width: '100vw',
-    height: '100vh'
+    width: '100vw'
   },
   card: {
     maxWidth: '50rem',

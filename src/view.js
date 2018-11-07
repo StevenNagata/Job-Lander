@@ -10,7 +10,7 @@ const styles = {
     position: 'absolute',
     width: '100vw',
     backgroundColor: '#E8F1F3',
-    paddingBottom: '5%'
+    height: '100vh'
   },
   grid: {
     marginTop: '2%'
@@ -60,6 +60,13 @@ const styles = {
     top: '10px',
     right: '10px',
     color: '#ED553B'
+  },
+  noStatus: {
+    textAlign: 'center',
+    fontSize: '1.5rem'
+  },
+  hideNoStatus: {
+    display: 'none'
   }
 }
 
@@ -80,12 +87,24 @@ export default class ViewProspects extends React.Component {
     if (!this.state.prospects) {
       return null
     }
+    let filtered = this.state.prospects
+    if (this.props.status) {
+      filtered = this.state.prospects.filter(job => job.status === this.props.status)
+    }
+    if (this.props.status === 'PhoneInterviewing') {
+      filtered = this.state.prospects.filter(job => job.status === 'Phone Interviewing')
+    }
+    let filterNoStatus = styles.hideNoStatus
+    if (filtered.length === 0) {
+      filterNoStatus = styles.noStatus
+    }
     return (
       <div style={styles.background}>
         <Grid
           style={styles.grid}>
+          <Typography style={filterNoStatus}>There are no prospects with this status</Typography>
           {
-            this.state.prospects.map(job => renderJob(job))
+            filtered.map(job => renderJob(job))
           }
         </Grid>
       </div >

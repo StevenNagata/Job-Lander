@@ -214,10 +214,11 @@ export default class App extends React.Component {
           <EventForm eventId={parseInt(params.uniqueId, 10)} isEdit saveEditedEvent={this.saveEditedEvent} />
         )
       default:
+        const status = params.filter
         return (
           <div>
             <Navbar />
-            <ViewProspects prospects={this.state.prospects} />
+            <ViewProspects prospects={this.state.prospects} status={status}/>
           </div>
         )
     }
